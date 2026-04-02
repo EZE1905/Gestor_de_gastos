@@ -1,4 +1,4 @@
-from m_gestor_de_gastos import leer_gastos,menu,agregar_gasto,mostrar_gastos,eliminar_gasto,total_gastado
+from m_gestor_de_gastos import leer_gastos,menu,agregar_gasto,mostrar_gastos,eliminar_gasto
 
 
 gastos = leer_gastos()
@@ -7,7 +7,7 @@ while True:
     try:
         eleccion = int(input("Ingrese una opcion: "))
         print("")
-        if eleccion not in [1,2,3,4,5]:
+        if eleccion not in [1,2,3,4]:
             print("Opcion inexistente")
         elif eleccion == 1:
             agregar_gasto(gastos)
@@ -19,8 +19,6 @@ while True:
         elif eleccion == 3:
             mostrar_gastos(gastos)
         elif eleccion == 4:
-            total_gastado(gastos)
-        elif eleccion == 5:
             break
     except Exception:
         print("")

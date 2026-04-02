@@ -18,8 +18,7 @@ def menu():
     print("1. Agregar gasto")
     print("2. Eliminar gasto")
     print("3. Mostrar gastos")
-    print("4. Mostrar total gastado")
-    print("5. Salir")
+    print("4. Salir")
     print("")
     
 def agregar_gasto(gastos):
@@ -49,10 +48,15 @@ def agregar_gasto(gastos):
 
 def mostrar_gastos(gastos):
     if len(gastos) > 0:
+        total = 0
         print("----- GASTOS -----")
         for i,gasto in enumerate(gastos):
             print(f"{i + 1}. ${gasto['Monto']} {gasto['Categoria']} {gasto['Fecha']}")
-        print("-----------------")
+            total = total + gasto['Monto']
+        print("")
+        print(f"Total gastado: ${total}")
+        print("---------------------")
+        return total
     else: 
         print("No hay gastos que mostrar")
 
@@ -74,15 +78,3 @@ def eliminar_gasto(gastos):
             print("")
             print("ERROR INTENTE DE NUEVO")
             print("")
-
-def total_gastado(gastos):
-    if len(gastos) > 0:
-        total = 0
-        print("----- TOTAL GASTADO -----")
-        for gasto in gastos:
-            total = total + gasto['Monto']
-        print(f"El total gastado es de ${total}")
-        print("-----------------")
-        return total
-    else: 
-        print("No hay gastos que sumar")
