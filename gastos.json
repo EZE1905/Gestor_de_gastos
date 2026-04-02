@@ -1,2 +1,17 @@
 [
+    {
+        "Monto": 1500,
+        "Categoria": "Ropa",
+        "Fecha": "01/04/2026"
+    },
+    {
+        "Monto": 1900,
+        "Categoria": "Ropa",
+        "Fecha": "01/04/2026"
+    },
+    {
+        "Monto": 4500,
+        "Categoria": "Luz",
+        "Fecha": "01/04/2026"
+    }
 ]
