@@ -13,5 +13,10 @@
         "Monto": 4500,
         "Categoria": "Luz",
         "Fecha": "01/04/2026"
+    },
+    {
+        "Monto": 1800,
+        "Categoria": "Comida",
+        "Fecha": "02/04/2026"
     }
 ]

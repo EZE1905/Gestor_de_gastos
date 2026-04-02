@@ -18,7 +18,8 @@ def menu():
     print("1. Agregar gasto")
     print("2. Eliminar gasto")
     print("3. Mostrar gastos")
-    print("4. Salir")
+    print("4. Filtrar por categoria")
+    print("5. Salir")
     print("")
     
 def agregar_gasto(gastos):
@@ -61,20 +62,33 @@ def mostrar_gastos(gastos):
         print("No hay gastos que mostrar")
 
 def eliminar_gasto(gastos):
-        mostrar_gastos(gastos)
-        try:
-            gasto_eliminado = int(input("Ingrese el gasto que desea eliminar: "))
-            if gasto_eliminado < 1 or gasto_eliminado > len(gastos):
-                print("Opcion inexistente")
-            else:
-                eliminacion = gastos.pop(gasto_eliminado - 1)
-                print("")
-                print(f"Se elimino: ${eliminacion ['Monto']} {eliminacion['Categoria']} {eliminacion['Fecha']}")
-                with open ("gastos.json", "w") as archivo:
-                    json.dump(gastos,archivo,indent=4) 
-                    print("GASTO ELIMINADO CORRECTAMENTE")
+    mostrar_gastos(gastos)
+    try:
+        gasto_eliminado = int(input("Ingrese el gasto que desea eliminar: "))
+        if gasto_eliminado < 1 or gasto_eliminado > len(gastos):
+            print("Opcion inexistente")
+        else:
+            eliminacion = gastos.pop(gasto_eliminado - 1)
+            print("")
+            print(f"Se elimino: ${eliminacion ['Monto']} {eliminacion['Categoria']} {eliminacion['Fecha']}")
+            with open ("gastos.json", "w") as archivo:
+                json.dump(gastos,archivo,indent=4) 
+                print("GASTO ELIMINADO CORRECTAMENTE")
             return gastos
-        except Exception:
-            print("")
-            print("ERROR INTENTE DE NUEVO")
-            print("")
+    except Exception:
+        print("")
+        print("ERROR INTENTE DE NUEVO")
+        print("")
+
+def filter_cat(gastos):
+    search_cat = input("Ingrese la categoria: ").capitalize()
+    encontrado = False
+    print("")
+    for gasto in gastos:
+        if gasto["Categoria"] == search_cat:
+            if encontrado == False:
+                print(f"----- {search_cat} -----")
+            print(f"{gasto['Monto']} {gasto['Categoria']} {gasto['Fecha']}")
+            encontrado = True
+    if encontrado == False:
+        print("No hay gastos en esa categoria")
