@@ -1,7 +1,8 @@
-from m_gestor_de_gastos import leer_gastos,menu,agregar_gasto,mostrar_gastos,eliminar_gasto,filter_cat
+from m_gestor_de_gastos import leer_gastos,menu,agregar_gasto,mostrar_gastos,eliminar_gasto,filter_cat,ordenar_gastos
 
 
 gastos = leer_gastos()
+ordenar_gastos(gastos)
 while True:
     menu()
     try:
@@ -18,10 +19,8 @@ while True:
                 print("No hay gastos que eliminar")
         elif eleccion == 3:
             mostrar_gastos(gastos)
-            print("solo otro commit")
         elif eleccion == 4:
             filter_cat(gastos)
-            print("solo para no perder el push del dia")
         elif eleccion == 5:
             break
     except Exception:

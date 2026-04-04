@@ -33,7 +33,7 @@ def agregar_gasto(gastos):
             gasto_nuevo = {
                 "Monto" : monto,
                 "Categoria" : f"{categoria}",
-                "Fecha" : f"{fecha}"
+                "Fecha" : fecha
             }
             gastos.append(gasto_nuevo)
             with open ("gastos.json", "w") as archivo:
@@ -92,3 +92,6 @@ def filter_cat(gastos):
             encontrado = True
     if encontrado == False:
         print("No hay gastos en esa categoria")
+
+def ordenar_gastos(gastos):
+    gastos.sort(key = lambda gasto: datetime.strptime(gasto["Fecha"],"%d/%m/%Y") , reverse = True)
