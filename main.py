@@ -20,6 +20,7 @@ while True:
             mostrar_gastos(gastos)
         elif eleccion == 4:
             filter_cat(gastos)
+            print("solo para no perder el push del dia")
         elif eleccion == 5:
             break
     except Exception:
