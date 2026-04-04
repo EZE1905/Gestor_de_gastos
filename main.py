@@ -18,6 +18,7 @@ while True:
                 print("No hay gastos que eliminar")
         elif eleccion == 3:
             mostrar_gastos(gastos)
+            print("solo otro commit")
         elif eleccion == 4:
             filter_cat(gastos)
             print("solo para no perder el push del dia")
