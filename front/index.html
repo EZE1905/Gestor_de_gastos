@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestor de Gastos</title>
+
+    <!-- LINK AL CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div><strong class="titulo">Gestor de Gastos</strong></div>
+        <div>
+            <a href="index.html">Inicio</a>
+            <a href="agregar.html">Agregar</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <!-- RESUMEN -->
+        <div class="card resumen">
+            <div>
+                <h3 class="detalles">Saldo</h3>
+                <p>$1000</p>
+            </div>
+            <div>
+                <h3 class="detalles">Ingresos</h3>
+                <p class="ingreso">$2000</p>
+            </div>
+            <div>
+                <h3 class="detalles">Gastos</h3>
+                <p class="gasto">$1000</p>
+            </div>
+        </div>
+
+        <!-- LISTA DE MOVIMIENTOS -->
+        <div class="card">
+            <h3 class="subtitulo">Movimientos</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Tipo</th>
+                        <th>Categoría</th>
+                        <th>Monto</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>01/04/2026</td>
+                        <td class="ingreso">Ingreso</td>
+                        <td>Sueldo</td>
+                        <td>$2000</td>
+                        <td>
+                            <button class="btn-editar">Editar</button>
+                            <button class="btn-eliminar">Eliminar</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>02/04/2026</td>
+                        <td class="gasto">Gasto</td>
+                        <td>Comida</td>
+                        <td>$500</td>
+                        <td>
+                            <button class="btn-editar">Editar</button>
+                            <button class="btn-eliminar">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+
+    <footer class="footer">
+        <h2 class="footer_title">Gestor de gastos</h2>
+        <div class="contenedor_a">
+            <a class="buttom_footer" href="index.html">Inicio</a>
+            <a class="buttom_footer" href="agregar.html">Agregar</a>
+        </div>
+    </footer>
+
+</body>
+</html>
