@@ -13,8 +13,9 @@ def leer_gastos():
     return gastos
 
 def menu():
+    nombre = input("elija un nombre para la planilla: ").upper()
     print("")
-    print("----- MENU -----")
+    print(f"----- MENU DE {nombre} -----")
     print("1. Agregar gasto")
     print("2. Eliminar gasto")
     print("3. Mostrar gastos")
