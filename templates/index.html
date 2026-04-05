@@ -1,23 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Gestor de Gastos</title>
+{% extends './layout.html' %}
 
-    <!-- LINK AL CSS -->
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+{% block title %}Gestor de gastos{% endblock %}
 
-    <!-- NAVBAR -->
-    <nav>
-        <div><strong class="titulo">Gestor de Gastos</strong></div>
-        <div>
-            <a href="index.html">Inicio</a>
-            <a href="agregar.html">Agregar</a>
-        </div>
-    </nav>
-
+{% block body %}
     <div class="container">
 
         <!-- RESUMEN -->
@@ -78,14 +63,4 @@
         </div>
 
     </div>
-
-    <footer class="footer">
-        <h2 class="footer_title">Gestor de gastos</h2>
-        <div class="contenedor_a">
-            <a class="buttom_footer" href="index.html">Inicio</a>
-            <a class="buttom_footer" href="agregar.html">Agregar</a>
-        </div>
-    </footer>
-
-</body>
-</html>
+{% endblock %}

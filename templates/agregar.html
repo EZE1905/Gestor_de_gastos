@@ -1,0 +1,23 @@
+{% extends './layout.html' %}
+
+{% block title %}Agregar gasto{% endblock %}
+</head>
+<body>
+    {% block body %}
+    <div class="contenedor">
+        <form class="formulario">
+            <h2 class="titulo_form">Agregar Datos</h2>
+            <label class="label_form" for="">Tipo (gasto/ingreso): </label>
+            <input class="input_form" type="text">
+            <label class="label_form" for="">Monto:  </label>
+            <input class="input_form" type="number">
+            <label class="label_form" for="">Categoria: </label>
+            <input class="input_form" type="text">
+            <label class="label_form" for="">Fecha: </label>
+            <input class="input_form" type="">
+            <button class="btn-form">Agregar</button>
+        </form>
+    </div>
+    {% endblock %}
+</body>
+</html>
