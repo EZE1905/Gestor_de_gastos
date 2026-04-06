@@ -1,11 +1,15 @@
-from flask import Flask, render_template,redirect,url_for
+from flask import Flask, render_template,redirect,url_for,request
+from m_gestor_de_gastos import leer_gastos,ordenar_gastos,agregar_gasto
 
 app = Flask(__name__)
+
+gastos = leer_gastos()
+ordenar_gastos(gastos)
 
 @app.route("/")
 def home():
     #return "Hola Flask!"
-    return render_template('index.html')
+    return render_template('index.html', gastos=gastos)
 
 @app.route("/agregar_datos")
 def agregar():

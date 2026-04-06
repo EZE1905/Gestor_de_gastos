@@ -1,26 +1,31 @@
 [
     {
         "Monto": 1500,
+        "Tipo": "gasto",
         "Categoria": "Ropa",
         "Fecha": "01/04/2026"
     },
     {
         "Monto": 1900,
+        "Tipo": "gasto",
         "Categoria": "Ropa",
         "Fecha": "01/04/2026"
     },
     {
         "Monto": 4500,
+        "Tipo": "gasto",
         "Categoria": "Luz",
         "Fecha": "01/04/2026"
     },
     {
         "Monto": 1800,
+        "Tipo": "ingreso",
         "Categoria": "Comida",
         "Fecha": "02/04/2026"
     },
     {
         "Monto": 15000,
+        "Tipo": "ingreso",
         "Categoria": "Ropa",
         "Fecha": "04/04/2026"
     }

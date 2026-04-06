@@ -23,20 +23,22 @@ def menu():
     print("5. Salir")
     print("")
     
-def agregar_gasto(gastos):
+def agregar_gasto(gastos,gasto):
     while True: 
         try:
             monto = int(input("ingrese el monto: "))
+            tipo = input("ingrese si es gasto o ingreso: ")
             categoria = input("ingrese una categoria: ").capitalize()
             ahora = datetime.now()
             #agregando la fecha del ingreso del gasto nuevo
             fecha = ahora.strftime("%d/%m/%Y")
             gasto_nuevo = {
                 "Monto" : monto,
+                "Tipo" : f"{tipo}",
                 "Categoria" : f"{categoria}",
                 "Fecha" : fecha
             }
-            gastos.append(gasto_nuevo)
+            gastos.append(gasto)
             with open ("gastos.json", "w") as archivo:
                 json.dump(gastos,archivo,indent=4) 
                 print("")

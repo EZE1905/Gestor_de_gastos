@@ -36,27 +36,18 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% for gasto in gastos %}
                     <tr>
-                        <td>01/04/2026</td>
-                        <td class="ingreso">Ingreso</td>
-                        <td>Sueldo</td>
-                        <td>$2000</td>
+                        <td>{{ gasto.Fecha }}</td>
+                        <td class="{{ 'ingreso' if gasto.Tipo == 'ingreso' else 'gasto'  }}">{{ gasto.Tipo }}</td>
+                        <td>{{ gasto.Categoria }}</td>
+                        <td>${{ gasto.Monto }}</td>
                         <td>
                             <button class="btn-editar">Editar</button>
                             <button class="btn-eliminar">Eliminar</button>
                         </td>
                     </tr>
-
-                    <tr>
-                        <td>02/04/2026</td>
-                        <td class="gasto">Gasto</td>
-                        <td>Comida</td>
-                        <td>$500</td>
-                        <td>
-                            <button class="btn-editar">Editar</button>
-                            <button class="btn-eliminar">Eliminar</button>
-                        </td>
-                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
 
