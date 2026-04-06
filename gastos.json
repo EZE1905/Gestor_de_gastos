@@ -1,32 +1,14 @@
 [
     {
-        "Monto": 1500,
+        "Monto": 15000,
         "Tipo": "gasto",
-        "Categoria": "Ropa",
-        "Fecha": "01/04/2026"
-    },
-    {
-        "Monto": 1900,
-        "Tipo": "gasto",
-        "Categoria": "Ropa",
-        "Fecha": "01/04/2026"
-    },
-    {
-        "Monto": 4500,
-        "Tipo": "gasto",
-        "Categoria": "Luz",
-        "Fecha": "01/04/2026"
-    },
-    {
-        "Monto": 1800,
-        "Tipo": "ingreso",
-        "Categoria": "Comida",
-        "Fecha": "02/04/2026"
+        "Categoria": "ropa",
+        "Fecha": "2004-11-30"
     },
     {
         "Monto": 15000,
-        "Tipo": "ingreso",
-        "Categoria": "Ropa",
-        "Fecha": "04/04/2026"
+        "Tipo": "gasto",
+        "Categoria": "ropa",
+        "Fecha": "2026-04-06"
     }
 ]

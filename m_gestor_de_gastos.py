@@ -11,43 +11,11 @@ def leer_gastos():
             #gastos es lo que quiero guardar y archivo es en donde lo quiero guardar
             gastos = json.dump(gastos,archivo)
     return gastos
-
-def menu():
-    nombre = input("elija un nombre para la planilla: ").upper()
-    print("")
-    print(f"----- MENU DE {nombre} -----")
-    print("1. Agregar gasto")
-    print("2. Eliminar gasto")
-    print("3. Mostrar gastos")
-    print("4. Filtrar por categoria")
-    print("5. Salir")
-    print("")
     
 def agregar_gasto(gastos,gasto):
-    while True: 
-        try:
-            monto = int(input("ingrese el monto: "))
-            tipo = input("ingrese si es gasto o ingreso: ")
-            categoria = input("ingrese una categoria: ").capitalize()
-            ahora = datetime.now()
-            #agregando la fecha del ingreso del gasto nuevo
-            fecha = ahora.strftime("%d/%m/%Y")
-            gasto_nuevo = {
-                "Monto" : monto,
-                "Tipo" : f"{tipo}",
-                "Categoria" : f"{categoria}",
-                "Fecha" : fecha
-            }
             gastos.append(gasto)
             with open ("gastos.json", "w") as archivo:
                 json.dump(gastos,archivo,indent=4) 
-                print("")
-                print("GASTO AGREGADO CORRECTAMENTE")
-            break
-        except Exception:
-            print("")
-            print("ERROR INTENTE DE NUEVO")
-            print("")
 
 
 def mostrar_gastos(gastos):
@@ -97,4 +65,4 @@ def filter_cat(gastos):
         print("No hay gastos en esa categoria")
 
 def ordenar_gastos(gastos):
-    gastos.sort(key = lambda gasto: datetime.strptime(gasto["Fecha"],"%d/%m/%Y") , reverse = True)
+    gastos.sort(key = lambda gasto: datetime.strptime(gasto["Fecha"],"%Y-%m-%d") , reverse = True)

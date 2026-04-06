@@ -5,16 +5,16 @@
 <body>
     {% block body %}
     <div class="contenedor">
-        <form class="formulario">
+        <form class="formulario" method="POST" action="/agregar_datos">
             <h2 class="titulo_form">Agregar Datos</h2>
-            <label class="label_form" for="">Tipo (gasto/ingreso): </label>
-            <input class="input_form" type="text">
             <label class="label_form" for="">Monto:  </label>
-            <input class="input_form" type="number">
+            <input class="input_form" name="monto" type="number">
+            <label class="label_form" for="">Tipo (gasto/ingreso): </label>
+            <input class="input_form" name="tipo" type="text">
             <label class="label_form" for="">Categoria: </label>
-            <input class="input_form" type="text">
+            <input class="input_form" name="categoria" type="text">
             <label class="label_form" for="">Fecha: </label>
-            <input class="input_form" type="">
+            <input class="input_form" name="fecha" type="date">
             <button class="btn-form">Agregar</button>
         </form>
     </div>

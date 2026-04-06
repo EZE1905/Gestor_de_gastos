@@ -1,19 +1,29 @@
 from flask import Flask, render_template,redirect,url_for,request
-from m_gestor_de_gastos import leer_gastos,ordenar_gastos,agregar_gasto
+from m_gestor_de_gastos import leer_gastos,agregar_gasto,ordenar_gastos
 
 app = Flask(__name__)
 
 gastos = leer_gastos()
-ordenar_gastos(gastos)
 
 @app.route("/")
 def home():
     #return "Hola Flask!"
+    ordenar_gastos(gastos)
     return render_template('index.html', gastos=gastos)
 
-@app.route("/agregar_datos")
+@app.route("/agregar_datos", methods = ["POST", "GET"])
 def agregar():
-    return render_template('agregar.html')
+    if request.method == "POST":
+        gasto = {
+            "Monto" : int(request.form["monto"]),
+            "Tipo" : request.form["tipo"],
+            "Categoria" : request.form["categoria"],
+            "Fecha" : request.form["fecha"]
+         }
+        agregar_gasto(gastos,gasto)
+        return render_template('index.html', gastos=gastos)
+    else:
+        return render_template('agregar.html')
 
 def pagina_no_encontrada(error):
     return redirect(url_for("index"))
