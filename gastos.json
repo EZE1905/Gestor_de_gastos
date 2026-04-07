@@ -1,1 +1,8 @@
-[]
+[
+    {
+        "Monto": 15000,
+        "Tipo": "ingreso",
+        "Categoria": "ropa",
+        "Fecha": "2026-04-07"
+    }
+]

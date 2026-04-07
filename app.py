@@ -25,7 +25,7 @@ def agregar():
             "Fecha" : request.form["fecha"]
          }
         agregar_gasto(gastos,gasto)
-        return render_template('index.html', gastos=gastos)
+        return redirect('/')
     else:
         return render_template('agregar.html')
 
