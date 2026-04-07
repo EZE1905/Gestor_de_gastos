@@ -1,14 +1,1 @@
-[
-    {
-        "Monto": 15000,
-        "Tipo": "gasto",
-        "Categoria": "ropa",
-        "Fecha": "2004-11-30"
-    },
-    {
-        "Monto": 15000,
-        "Tipo": "gasto",
-        "Categoria": "ropa",
-        "Fecha": "2026-04-06"
-    }
-]
+[]

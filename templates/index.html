@@ -9,15 +9,15 @@
         <div class="card resumen">
             <div>
                 <h3 class="detalles">Saldo</h3>
-                <p>$1000</p>
+                <p>${{ saldo }}</p>
             </div>
             <div>
                 <h3 class="detalles">Ingresos</h3>
-                <p class="ingreso">$2000</p>
+                <p class="ingreso">${{ total_ingresos }}</p>
             </div>
             <div>
                 <h3 class="detalles">Gastos</h3>
-                <p class="gasto">$1000</p>
+                <p class="gasto">${{ total_gastado }}</p>
             </div>
         </div>
 
@@ -41,10 +41,12 @@
                         <td>{{ gasto.Fecha }}</td>
                         <td class="{{ 'ingreso' if gasto.Tipo == 'ingreso' else 'gasto'  }}">{{ gasto.Tipo }}</td>
                         <td>{{ gasto.Categoria }}</td>
-                        <td>${{ gasto.Monto }}</td>
+                        <td>${{ "{:,}".format(gasto['Monto']).replace(",",".") }}</td>
                         <td>
-                            <button class="btn-editar">Editar</button>
+                            <form action="/eliminar" method="POST">
+                            <input type="hidden" name="indice" value="{{ loop.index0 }}">
                             <button class="btn-eliminar">Eliminar</button>
+                            </form>
                         </td>
                     </tr>
                     {% endfor %}

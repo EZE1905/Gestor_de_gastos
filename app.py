@@ -1,5 +1,5 @@
 from flask import Flask, render_template,redirect,url_for,request
-from m_gestor_de_gastos import leer_gastos,agregar_gasto,ordenar_gastos
+from m_gestor_de_gastos import leer_gastos,agregar_gasto,ordenar_gastos,calcular_gastos,eliminar_gasto
 
 app = Flask(__name__)
 
@@ -9,7 +9,11 @@ gastos = leer_gastos()
 def home():
     #return "Hola Flask!"
     ordenar_gastos(gastos)
-    return render_template('index.html', gastos=gastos)
+    saldo, total_gastado, total_ingresos = calcular_gastos(gastos)
+    saldo_formateado = f"{saldo:,}".replace(",", ".")
+    ingreso_formateado = f"{total_ingresos:,}".replace(",", ".")
+    gasto_formateado = f"{total_gastado:,}".replace(",", ".")
+    return render_template('index.html', gastos=gastos,saldo = saldo_formateado,total_gastado = gasto_formateado,total_ingresos = ingreso_formateado )
 
 @app.route("/agregar_datos", methods = ["POST", "GET"])
 def agregar():
@@ -24,6 +28,12 @@ def agregar():
         return render_template('index.html', gastos=gastos)
     else:
         return render_template('agregar.html')
+
+@app.route("/eliminar", methods = ["POST"])
+def eliminar():
+    indice = int(request.form["indice"])
+    eliminar_gasto(gastos,indice)
+    return redirect("/")
 
 def pagina_no_encontrada(error):
     return redirect(url_for("index"))

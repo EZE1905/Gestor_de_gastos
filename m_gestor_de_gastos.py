@@ -17,39 +17,11 @@ def agregar_gasto(gastos,gasto):
             with open ("gastos.json", "w") as archivo:
                 json.dump(gastos,archivo,indent=4) 
 
-
-def mostrar_gastos(gastos):
-    if len(gastos) > 0:
-        total = 0
-        print("----- GASTOS -----")
-        for i,gasto in enumerate(gastos):
-            print(f"{i + 1}. ${gasto['Monto']} {gasto['Categoria']} {gasto['Fecha']}")
-            total = total + gasto['Monto']
-        print("")
-        print(f"Total gastado: ${total}")
-        print("---------------------")
-        return total
-    else: 
-        print("No hay gastos que mostrar")
-
-def eliminar_gasto(gastos):
-    mostrar_gastos(gastos)
-    try:
-        gasto_eliminado = int(input("Ingrese el gasto que desea eliminar: "))
-        if gasto_eliminado < 1 or gasto_eliminado > len(gastos):
-            print("Opcion inexistente")
-        else:
-            eliminacion = gastos.pop(gasto_eliminado - 1)
-            print("")
-            print(f"Se elimino: ${eliminacion ['Monto']} {eliminacion['Categoria']} {eliminacion['Fecha']}")
-            with open ("gastos.json", "w") as archivo:
-                json.dump(gastos,archivo,indent=4) 
-                print("GASTO ELIMINADO CORRECTAMENTE")
-            return gastos
-    except Exception:
-        print("")
-        print("ERROR INTENTE DE NUEVO")
-        print("")
+def eliminar_gasto(gastos,indice):
+    gastos.pop(indice)
+    with open ("gastos.json", "w") as archivo:
+        json.dump(gastos,archivo,indent=4) 
+        return gastos
 
 def filter_cat(gastos):
     search_cat = input("Ingrese la categoria: ").capitalize()
@@ -66,3 +38,14 @@ def filter_cat(gastos):
 
 def ordenar_gastos(gastos):
     gastos.sort(key = lambda gasto: datetime.strptime(gasto["Fecha"],"%Y-%m-%d") , reverse = True)
+
+def calcular_gastos(gastos):
+    total_ingresos = 0
+    total_gastado = 0
+    for gasto in gastos:
+        if gasto["Tipo"] == "ingreso":
+            total_ingresos = total_ingresos + gasto["Monto"]
+        elif gasto["Tipo"] == "gasto":
+            total_gastado = total_gastado + gasto["Monto"]
+    saldo = total_ingresos - total_gastado
+    return saldo,total_gastado,total_ingresos
