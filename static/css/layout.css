@@ -280,10 +280,25 @@ button {
 }
 
 /* TEXTO */
+/* estilo general para los párrafos del resumen */
 .resumen_chart p {
-    font-size: 0.95rem;
-    line-height: 1.5;
-    color: #555;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 18px;
+    color: #000000;
+    margin: 5px 0;
+    padding: 3px;  
+    transition: all 0.3s ease;
+}
+
+/* efecto hover para que se vea dinámico */
+.resumen_chart p:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #343232;
+    transform: translateX(5px);
+}
+
+.resumen_chart p::first-letter {
+    text-transform: uppercase;
 }
 
 /* HOVER SUAVE */
@@ -299,6 +314,6 @@ button {
     }
 
     .grafico canvas {
-        height: 250px !important;
+        height: 250px;
     }
 }

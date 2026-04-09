@@ -12,7 +12,13 @@
         </div>
         <div class="resumen_chart">
             <h2>Gastos</h2>
-            <p>Resumen de gastos...</p>
+            <p>Resumen de gastos</p>
+            <br>
+            {% for clave,valor in cat_gastos.items() %}
+            <p>{{ clave }}: ${{ valor }}</p>
+            {% endfor %}
+            <br>
+            <p>Total gastado: ${{ totales.gastos }}</p>
         </div>
     </div>
 </div>
@@ -24,7 +30,13 @@
         </div>
         <div class="resumen_chart">
             <h2>Ingresos</h2>
-            <p>Resumen de ingresos...</p>
+            <p>Resumen de ingresos</p>
+            <br>
+            {% for clave,valor in cat_ingresos.items() %}
+                <p>{{ clave }}: ${{ valor }}</p>
+            {% endfor %}
+            <br>
+            <p>Total de ingresos: ${{ totales.ingresos }}</p>
         </div>
     </div>
 </div>
@@ -36,7 +48,13 @@
         </div>
         <div class="resumen_chart">
             <h2>Balance</h2>
-            <p>Resumen de balance...</p>
+            <p>Resumen de balance</p>
+            <br>
+            <p>Total ingresos: ${{ totales.ingresos }}</p>
+            <br>
+            <p>Total gastos: ${{ totales.gastos }}</p>
+            <br>
+            <p>Saldo disponible: ${{ totales.saldo }}</p>
         </div>
     </div>
 </div>

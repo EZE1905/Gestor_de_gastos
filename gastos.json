@@ -1,5 +1,17 @@
 [
     {
+        "Monto": 30000,
+        "Tipo": "ingreso",
+        "Categoria": "arreglos",
+        "Fecha": "2026-04-09"
+    },
+    {
+        "Monto": 15000,
+        "Tipo": "gasto",
+        "Categoria": "comida",
+        "Fecha": "2026-04-09"
+    },
+    {
         "Monto": 25000,
         "Tipo": "ingreso",
         "Categoria": "ventas de productos",
