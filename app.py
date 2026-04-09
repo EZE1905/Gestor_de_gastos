@@ -1,6 +1,6 @@
 from flask import Flask, render_template,redirect,url_for,request
 import json
-from m_gestor_de_gastos import leer_gastos,agregar_gasto,ordenar_gastos,calcular_gastos,eliminar_gasto
+from m_gestor_de_gastos import leer_gastos,agregar_gasto,ordenar_gastos,calcular_gastos,eliminar_gasto,calcular_por_categoria
 
 app = Flask(__name__)
 
@@ -56,6 +56,9 @@ def editar():
             json.dump(gastos,archivo,indent=4) 
         return redirect("/")
 
+@app.route("/resumen")
+def resumen():
+    return render_template('resumen.html')
 def pagina_no_encontrada(error):
     return redirect(url_for("index"))
 

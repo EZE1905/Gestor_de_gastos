@@ -23,19 +23,6 @@ def eliminar_gasto(gastos,indice):
         json.dump(gastos,archivo,indent=4) 
         return gastos
 
-def filter_cat(gastos):
-    search_cat = input("Ingrese la categoria: ").capitalize()
-    encontrado = False
-    print("")
-    for gasto in gastos:
-        if gasto["Categoria"] == search_cat:
-            if encontrado == False:
-                print(f"----- {search_cat} -----")
-            print(f"{gasto['Monto']} {gasto['Categoria']} {gasto['Fecha']}")
-            encontrado = True
-    if encontrado == False:
-        print("No hay gastos en esa categoria")
-
 def ordenar_gastos(gastos):
     gastos.sort(key = lambda gasto: datetime.strptime(gasto["Fecha"],"%Y-%m-%d") , reverse = True)
 
@@ -49,3 +36,21 @@ def calcular_gastos(gastos):
             total_gastado = total_gastado + gasto["Monto"]
     saldo = total_ingresos - total_gastado
     return saldo,total_gastado,total_ingresos
+
+def calcular_por_categoria(gastos):
+    cat_ingresos = {}
+    cat_gastos = {}
+    for gasto in gastos:
+        categoria = gasto["Categoria"]
+        monto = gasto["Monto"]
+        if gasto["Tipo"] == "ingreso":
+            if categoria in cat_ingresos:
+                cat_ingresos[categoria] += monto
+            else:
+                cat_ingresos[categoria] = monto
+        elif gasto["Tipo"] == "gasto":
+            if categoria in cat_gastos:
+                cat_gastos[categoria] += monto
+            else:
+                cat_gastos[categoria] = monto
+        return cat_gastos, cat_ingresos
