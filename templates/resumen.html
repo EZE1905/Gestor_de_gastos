@@ -3,4 +3,17 @@
 {% block title %}Gestor de gastos{% endblock %}
 
 {% block body %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.umd.js"></script>
+<div class="caja_graficos">
+    <div class="grafico_gastos">
+        <canvas id="gastos"></canvas>
+    </div>
+    <div class="grafico_ingresos">
+        <canvas id="ingresos"></canvas>
+    </div>
+</div>
+<script>
+    window.datos = {{ cat_gastos | tojson | safe }};
+</script>
+<script src="{{ url_for('static', filename='js/resumen.js') }}"></script>
 {% endblock %}

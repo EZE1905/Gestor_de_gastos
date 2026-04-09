@@ -58,7 +58,9 @@ def editar():
 
 @app.route("/resumen")
 def resumen():
-    return render_template('resumen.html')
+    cat_gastos, cat_ingresos = calcular_por_categoria(gastos)
+    return render_template('resumen.html', cat_gastos = cat_gastos, cat_ingresos = cat_ingresos)
+
 def pagina_no_encontrada(error):
     return redirect(url_for("index"))
 

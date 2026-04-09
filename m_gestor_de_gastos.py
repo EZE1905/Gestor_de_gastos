@@ -45,12 +45,12 @@ def calcular_por_categoria(gastos):
         monto = gasto["Monto"]
         if gasto["Tipo"] == "ingreso":
             if categoria in cat_ingresos:
-                cat_ingresos[categoria] += monto
+                cat_ingresos[categoria] = cat_ingresos[categoria] + monto
             else:
                 cat_ingresos[categoria] = monto
         elif gasto["Tipo"] == "gasto":
             if categoria in cat_gastos:
-                cat_gastos[categoria] += monto
+                cat_gastos[categoria] = cat_gastos[categoria] + monto
             else:
                 cat_gastos[categoria] = monto
-        return cat_gastos, cat_ingresos
+    return cat_gastos, cat_ingresos
