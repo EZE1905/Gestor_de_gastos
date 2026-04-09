@@ -19,14 +19,16 @@
         </div>
     </nav>
     <!-- cambia segun la seccion que estemos -->
-    {% block body %}
-    {% endblock %}
+     <main>
+        {% block body %}
+        {% endblock %}
+     </main>
     <footer class="footer">
         <h2 class="footer_title">Gestor de gastos</h2>
         <div class="contenedor_a">
             <a class="buttom_footer" href="/">Inicio</a>
             <a class="buttom_footer" href="/agregar_datos">Agregar</a>
-            <a href="/resumen">Resumen</a>
+            <a href="/resumen" class="buttom_footer">Resumen</a>
         </div>
     </footer>
     <script src="{{ url_for('static', filename='js/layout.js')}}"></script>

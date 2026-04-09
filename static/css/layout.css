@@ -8,6 +8,13 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
 }
 
 /* NAVBAR */
@@ -127,9 +134,7 @@ button {
     background-color: #333;
     color: white;
     padding: 25px;
-    position: absolute; 
-    bottom: 0;
-    min-width: 100%;
+    width: 100%;
 }
 
 .footer_title{
@@ -217,4 +222,83 @@ button {
 /* HOVER BOTÓN */
 .btn-form:hover {
     background-color: #43a047;
+}
+
+/* SECCION RESUMEN CHARTS */
+/* TITULO */
+.titulo_resumen {
+    text-align: center;
+    font-size: 3rem;
+    margin: 60px;
+}
+
+/* SECCIONES */
+.seccion {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 60px;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.contenido {
+    width: 90%;
+    max-width: 1000px;
+    display: flex;
+    gap: 30px;
+    padding: 25px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* GRAFICO */
+.grafico {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CONTROL DEL CANVAS */
+.grafico canvas {
+    max-width: 100%;
+    height: 280px;
+}
+
+/* RESUMEN TEXTO */
+.resumen_chart {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* TITULO INTERNO */
+.resumen_chart h2 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+/* TEXTO */
+.resumen_chart p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #555;
+}
+
+/* HOVER SUAVE */
+.contenido:hover {
+    transform: translateY(-3px);
+    transition: 0.2s ease;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .contenido {
+        flex-direction: column;
+    }
+
+    .grafico canvas {
+        height: 250px !important;
+    }
 }

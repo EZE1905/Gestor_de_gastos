@@ -59,7 +59,13 @@ def editar():
 @app.route("/resumen")
 def resumen():
     cat_gastos, cat_ingresos = calcular_por_categoria(gastos)
-    return render_template('resumen.html', cat_gastos = cat_gastos, cat_ingresos = cat_ingresos)
+    saldo, total_gastado, total_ingresos = calcular_gastos(gastos)
+    totales = {
+        "gastos" : total_gastado,
+        "ingresos" : total_ingresos,
+        "saldo" : saldo
+    }
+    return render_template('resumen.html',cat_gastos=cat_gastos,cat_ingresos=cat_ingresos,totales=totales)
 
 def pagina_no_encontrada(error):
     return redirect(url_for("index"))
