@@ -8,16 +8,16 @@
         <form class="formulario" method="POST" action="/agregar_datos">
             <h2 class="titulo_form">Agregar Datos</h2>
             <label class="label_form" for="">Monto:  </label>
-            <input class="input_form" name="monto" type="number">
+            <input class="input_form" name="monto" type="number" required>
             <label class="label_form" for="">Tipo (gasto/ingreso): </label>
             <select name="tipo" class="input_form">
                 <option value="ingreso">ingreso</option>
                 <option value="gasto">gasto</option>
             </select>
             <label class="label_form" for="">Categoria: </label>
-            <input class="input_form" name="categoria" type="text">
+            <input class="input_form" name="categoria" type="text" required>
             <label class="label_form" for="">Fecha: </label>
-            <input class="input_form" name="fecha" type="date">
+            <input class="input_form" name="fecha" type="date" required>
             <button class="btn-form">Agregar</button>
         </form>
     </div>

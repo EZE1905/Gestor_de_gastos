@@ -1,6 +1,7 @@
 *{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -83,6 +84,26 @@ table th, table td {
     text-align: center;
 }
 
+td {
+    vertical-align: middle;
+}
+
+.botones {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.botones form {
+    margin: 0;
+}
+
+.botones button {
+    white-space: nowrap;
+}
+
 button {
     padding: 5px 10px;
     border: none;
@@ -93,6 +114,7 @@ button {
 .btn-eliminar {
     background-color: red;
     color: white;
+    margin: 10px;
 }
 
 .btn-editar {
@@ -107,7 +129,7 @@ button {
     padding: 25px;
     position: absolute; 
     bottom: 0;
-    width: 100%;
+    min-width: 100%;
 }
 
 .footer_title{

@@ -1,0 +1,24 @@
+{% extends './layout.html' %}
+
+{% block title %}Gestor de gastos{% endblock %}
+
+{% block body %}
+    <div class="contenedor">
+        <form class="formulario" method="POST" action="/editar">
+            <h2 class="titulo_form">Editar Datos</h2>
+            <label class="label_form" for="">Monto:  </label>
+            <input class="input_form" name="monto" type="number" value="{{ gasto.Monto }}" required>
+            <label class="label_form" for="">Tipo (gasto/ingreso): </label>
+            <select name="tipo" class="input_form">
+                <option value="ingreso">ingreso</option>
+                <option value="gasto">gasto</option>
+            </select>
+            <label class="label_form" for="">Categoria: </label>
+            <input class="input_form" name="categoria" type="text" value="{{ gasto.Categoria }}" required>
+            <label class="label_form" for="">Fecha: </label>
+            <input class="input_form" name="fecha" type="date" value="{{ gasto.Fecha }}" required>
+            <input type="hidden" name="indice" value="{{ indice }}">
+            <button class="btn-form">Editar</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,4 +1,5 @@
 from flask import Flask, render_template,redirect,url_for,request
+import json
 from m_gestor_de_gastos import leer_gastos,agregar_gasto,ordenar_gastos,calcular_gastos,eliminar_gasto
 
 app = Flask(__name__)
@@ -34,6 +35,26 @@ def eliminar():
     indice = int(request.form["indice"])
     eliminar_gasto(gastos,indice)
     return redirect("/")
+
+@app.route("/editar", methods = ["GET", "POST"])
+def editar():
+    if request.method == "GET":
+        indice = request.args.get("indice")
+        indice = int(indice)
+        gasto = gastos[indice]
+        return render_template('editar.html',gasto = gasto,indice = indice)
+    elif request.method == "POST":
+        nuevo_gasto = {
+            "Monto" : int(request.form["monto"]),
+            "Tipo" : request.form["tipo"],
+            "Categoria" : request.form["categoria"],
+            "Fecha" : request.form["fecha"]
+        }
+        indice = int(request.form["indice"])
+        gastos[indice] = nuevo_gasto
+        with open ("gastos.json", "w") as archivo:
+            json.dump(gastos,archivo,indent=4) 
+        return redirect("/")
 
 def pagina_no_encontrada(error):
     return redirect(url_for("index"))

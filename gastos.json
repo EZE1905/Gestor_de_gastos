@@ -1,8 +1,20 @@
 [
     {
-        "Monto": 15000,
+        "Monto": 25000,
         "Tipo": "ingreso",
-        "Categoria": "ropa",
-        "Fecha": "2026-04-07"
+        "Categoria": "venta de productos",
+        "Fecha": "2026-04-08"
+    },
+    {
+        "Monto": 25000,
+        "Tipo": "ingreso",
+        "Categoria": "venta de productos",
+        "Fecha": "2026-04-08"
+    },
+    {
+        "Monto": 15500,
+        "Tipo": "ingreso",
+        "Categoria": "ventas de productos",
+        "Fecha": "2026-04-08"
     }
 ]
