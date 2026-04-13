@@ -4,7 +4,6 @@
 
 {% block body %}
     <div class="container">
-
         <!-- RESUMEN -->
         <div class="card resumen">
             <div>
@@ -62,4 +61,10 @@
         </div>
 
     </div>
+    <!-- MENSAJES FLASH -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        <script>
+            window.mensajes = {{ messages | tojson | safe }};
+        </script>
+    {% endwith %}
 {% endblock %}

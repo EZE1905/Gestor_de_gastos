@@ -1,8 +1,9 @@
-from flask import Flask, render_template,redirect,url_for,request
+from flask import Flask, render_template,redirect,url_for,request,flash
 import json
 from m_gestor_de_gastos import leer_gastos,agregar_gasto,ordenar_gastos,calcular_gastos,eliminar_gasto,calcular_por_categoria
 
 app = Flask(__name__)
+app.secret_key = 'super_secret_key' # Necesario para sesiones
 
 gastos = leer_gastos()
 
@@ -26,6 +27,7 @@ def agregar():
             "Fecha" : request.form["fecha"]
          }
         agregar_gasto(gastos,gasto)
+        flash('Dato agregado correctamente','success') # Mensaje flash
         return redirect('/')
     else:
         return render_template('agregar.html')
@@ -34,6 +36,7 @@ def agregar():
 def eliminar():
     indice = int(request.form["indice"])
     eliminar_gasto(gastos,indice)
+    flash('Dato eliminado correctamente','error') # Mensaje flash
     return redirect("/")
 
 @app.route("/editar", methods = ["GET", "POST"])
@@ -54,6 +57,7 @@ def editar():
         gastos[indice] = nuevo_gasto
         with open ("gastos.json", "w") as archivo:
             json.dump(gastos,archivo,indent=4) 
+        flash('Dato editado correctamente','info') # Mensaje flash
         return redirect("/")
 
 @app.route("/resumen")

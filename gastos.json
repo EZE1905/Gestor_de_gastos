@@ -1,38 +1,8 @@
 [
     {
-        "Monto": 30000,
+        "Monto": 12333,
         "Tipo": "ingreso",
-        "Categoria": "arreglos",
-        "Fecha": "2026-04-09"
-    },
-    {
-        "Monto": 15000,
-        "Tipo": "gasto",
-        "Categoria": "comida",
-        "Fecha": "2026-04-09"
-    },
-    {
-        "Monto": 25000,
-        "Tipo": "ingreso",
-        "Categoria": "ventas de productos",
-        "Fecha": "2026-04-08"
-    },
-    {
-        "Monto": 15500,
-        "Tipo": "ingreso",
-        "Categoria": "servicio",
-        "Fecha": "2026-04-08"
-    },
-    {
-        "Monto": 15500,
-        "Tipo": "gasto",
-        "Categoria": "ropa",
-        "Fecha": "2026-04-08"
-    },
-    {
-        "Monto": 15500,
-        "Tipo": "gasto",
-        "Categoria": "compras",
-        "Fecha": "2026-04-08"
+        "Categoria": "venta de productos",
+        "Fecha": "2026-04-12"
     }
 ]
