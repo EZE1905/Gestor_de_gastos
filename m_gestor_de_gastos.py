@@ -57,8 +57,26 @@ def calcular_por_categoria(gastos):
 
 def filtrar_mes(mes,gastos):
     gastos_mes = []
-    for gasto in gastos:
-        if gasto["Fecha"].startswith(mes):
-            gastos_mes.append(gasto)
-    return gastos_mes
-    
+    if mes:
+        for gasto in gastos:
+            if gasto["Fecha"].startswith(mes):
+                gastos_mes.append(gasto)
+        return gastos_mes
+    else:
+        return gastos
+
+def meses(mes):
+    if mes: 
+        resultado = mes.split("-")
+        ano = resultado[0]
+        mes_format = resultado[1]
+        mesesformat = {
+            "01" : "enero",
+            "02" : "febrero",
+            "03" : "marzo"
+        }
+        mesmarcado = mesesformat[mes_format].capitalize()
+        mestitulo = mesmarcado + " " + ano
+    else:
+        mestitulo = "Todos los movimientos"
+    return mestitulo

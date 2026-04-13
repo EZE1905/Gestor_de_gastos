@@ -23,16 +23,15 @@
         <!-- LISTA DE MOVIMIENTOS -->
         <div class="card">
             {% if mes %}
-                <h3 class="subtitulo">Movimientos de {{ mes }}</h3>
+                <h3 class="subtitulo">Movimientos de {{ mes_titulo }}</h3>
             {% else %}
-                <h3 class="subtitulo">Movimientos</h3>
+                <h3 class="subtitulo">{{ mes_titulo }}</h3>
             {% endif %}
             <form method="GET" action="/">
                 <select name="mes">
                     <option value="">Todos</option>
-                    <option value="2026-01">Enero</option>
-                    <option value="2026-02">Febrero</option>
-                    <option value="2026-03">Marzo</option>
+                    <option value="2026-02" {% if mes == "2026-02" %} selected {% endif %}>Febrero</option>
+                    <option value="2026-03"{% if mes == "2026-03" %} selected {% endif %}>Marzo</option>
                 </select>
                 <button type="submit">Filtrar</button>
             </form>
