@@ -18,23 +18,41 @@ main {
 }
 
 /* NAVBAR */
-.titulo{
-    font-size: 20px;
+
+.img{
+    height: 40px;
+    width: auto;
+    margin-right: auto;
+    margin-left: 30px;
 }
 
 nav {
+    height: 80px;
+    width: 100%;
     background-color: #333;
-    color: white;
-    padding: 25px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+nav div{
+    margin-right: 20px;
 }
 
 nav a {
+    font-size: 17px;
+    font-weight: 500;
     color: white;
     text-decoration: none;
-    margin-left: 30px;
-    font-size: 15px;
+    margin: 20px;
+    transition: 0.4s;
+}
+
+nav a:hover{
+    padding: 10px;
+    border-radius: 5px;
+    background-color: white;
+    color: #222;
 }
 
 /* CONTENEDOR */
@@ -228,7 +246,7 @@ button {
 /* TITULO */
 .titulo_resumen {
     text-align: center;
-    font-size: 3rem;
+    font-size: 38px;
     margin: 60px;
 }
 
@@ -321,7 +339,7 @@ button {
 /* CONTENEDOR (arriba derecha) */
 .contenedor_msj {
     position: fixed;
-    top: 80px;
+    top: 90px;
     right: 20px;
     display: flex;
     flex-direction: column;
