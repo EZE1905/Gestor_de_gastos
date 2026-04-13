@@ -22,19 +22,22 @@
 
         <!-- LISTA DE MOVIMIENTOS -->
         <div class="card">
-            {% if mes %}
-                <h3 class="subtitulo">Movimientos de {{ mes_titulo }}</h3>
-            {% else %}
-                <h3 class="subtitulo">{{ mes_titulo }}</h3>
-            {% endif %}
-            <form method="GET" action="/">
-                <select name="mes">
-                    <option value="">Todos</option>
-                    <option value="2026-02" {% if mes == "2026-02" %} selected {% endif %}>Febrero</option>
-                    <option value="2026-03"{% if mes == "2026-03" %} selected {% endif %}>Marzo</option>
-                </select>
-                <button type="submit">Filtrar</button>
-            </form>
+            <div class="contenedor_titulo_filtro">
+                {% if mes %}
+                    <h3 class="subtitulo">Movimientos de {{ mes_titulo }}</h3>
+                {% else %}
+                    <h3 class="subtitulo">{{ mes_titulo }}</h3>
+                {% endif %}
+                <!-- FILTRO -->
+                <form method="GET" action="/">
+                    <select name="mes" class="filtro">
+                        <option value="">Todos</option>
+                        <option value="2026-02" {% if mes == "2026-02" %} selected {% endif %}>Febrero</option>
+                        <option value="2026-03"{% if mes == "2026-03" %} selected {% endif %}>Marzo</option>
+                    </select>
+                    <button type="submit">Filtrar</button>
+                </form>
+            </div>
             <table>
                 <thead>
                     <tr>

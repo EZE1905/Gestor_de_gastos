@@ -65,14 +65,17 @@ def editar():
 
 @app.route("/resumen")
 def resumen():
-    cat_gastos, cat_ingresos = calcular_por_categoria(gastos)
-    saldo, total_gastado, total_ingresos = calcular_gastos(gastos)
+    mes = request.args.get("mes")
+    gastos_mes = filtrar_mes(mes,gastos)
+    mes_titulo = meses(mes)
+    cat_gastos, cat_ingresos = calcular_por_categoria(gastos_mes)
+    saldo, total_gastado, total_ingresos = calcular_gastos(gastos_mes)
     totales = {
         "gastos" : total_gastado,
         "ingresos" : total_ingresos,
         "saldo" : saldo
     }
-    return render_template('resumen.html',cat_gastos=cat_gastos,cat_ingresos=cat_ingresos,totales=totales)
+    return render_template('resumen.html',mes_titulo = mes_titulo,mes = mes,gastos_mes=gastos_mes,cat_gastos=cat_gastos,cat_ingresos=cat_ingresos,totales=totales)
 
 def pagina_no_encontrada(error):
     return redirect(url_for("index"))

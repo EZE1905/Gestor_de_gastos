@@ -26,10 +26,10 @@ def eliminar_gasto(gastos,indice):
 def ordenar_gastos(gastos):
     gastos.sort(key = lambda gasto: datetime.strptime(gasto["Fecha"],"%Y-%m-%d") , reverse = True)
 
-def calcular_gastos(gastos):
+def calcular_gastos(gastos_mes):
     total_ingresos = 0
     total_gastado = 0
-    for gasto in gastos:
+    for gasto in gastos_mes:
         if gasto["Tipo"] == "ingreso":
             total_ingresos = total_ingresos + gasto["Monto"]
         elif gasto["Tipo"] == "gasto":
@@ -37,10 +37,10 @@ def calcular_gastos(gastos):
     saldo = total_ingresos - total_gastado
     return saldo,total_gastado,total_ingresos
 
-def calcular_por_categoria(gastos):
+def calcular_por_categoria(gastos_mes):
     cat_ingresos = {}
     cat_gastos = {}
-    for gasto in gastos:
+    for gasto in gastos_mes:
         categoria = gasto["Categoria"]
         monto = gasto["Monto"]
         if gasto["Tipo"] == "ingreso":
