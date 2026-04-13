@@ -22,8 +22,20 @@
 
         <!-- LISTA DE MOVIMIENTOS -->
         <div class="card">
-            <h3 class="subtitulo">Movimientos</h3>
-
+            {% if mes %}
+                <h3 class="subtitulo">Movimientos de {{ mes }}</h3>
+            {% else %}
+                <h3 class="subtitulo">Movimientos</h3>
+            {% endif %}
+            <form method="GET" action="/">
+                <select name="mes">
+                    <option value="">Todos</option>
+                    <option value="2026-01">Enero</option>
+                    <option value="2026-02">Febrero</option>
+                    <option value="2026-03">Marzo</option>
+                </select>
+                <button type="submit">Filtrar</button>
+            </form>
             <table>
                 <thead>
                     <tr>
@@ -35,7 +47,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for gasto in gastos %}
+                    {% for gasto in gastos_mes %}
                     <tr>
                         <td>{{ gasto.Fecha }}</td>
                         <td class="{{ 'ingreso' if gasto.Tipo == 'ingreso' else 'gasto'  }}">{{ gasto.Tipo }}</td>

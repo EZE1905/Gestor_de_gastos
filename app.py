@@ -1,6 +1,6 @@
 from flask import Flask, render_template,redirect,url_for,request,flash
 import json
-from m_gestor_de_gastos import leer_gastos,agregar_gasto,ordenar_gastos,calcular_gastos,eliminar_gasto,calcular_por_categoria
+from m_gestor_de_gastos import leer_gastos,agregar_gasto,ordenar_gastos,calcular_gastos,eliminar_gasto,calcular_por_categoria,filtrar_mes
 
 app = Flask(__name__)
 app.secret_key = 'super_secret_key' # Necesario para sesiones
@@ -10,12 +10,14 @@ gastos = leer_gastos()
 @app.route("/")
 def home():
     #return "Hola Flask!"
+    mes = request.args.get("mes")
+    gastos_mes = filtrar_mes(mes,gastos)
     ordenar_gastos(gastos)
-    saldo, total_gastado, total_ingresos = calcular_gastos(gastos)
+    saldo, total_gastado, total_ingresos = calcular_gastos(gastos_mes)
     saldo_formateado = f"{saldo:,}".replace(",", ".")
     ingreso_formateado = f"{total_ingresos:,}".replace(",", ".")
     gasto_formateado = f"{total_gastado:,}".replace(",", ".")
-    return render_template('index.html', gastos=gastos,saldo = saldo_formateado,total_gastado = gasto_formateado,total_ingresos = ingreso_formateado )
+    return render_template('index.html',mes=mes,gastos_mes=gastos_mes, gastos=gastos,saldo = saldo_formateado,total_gastado = gasto_formateado,total_ingresos = ingreso_formateado )
 
 @app.route("/agregar_datos", methods = ["POST", "GET"])
 def agregar():

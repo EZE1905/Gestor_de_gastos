@@ -54,3 +54,11 @@ def calcular_por_categoria(gastos):
             else:
                 cat_gastos[categoria] = monto
     return cat_gastos, cat_ingresos
+
+def filtrar_mes(mes,gastos):
+    gastos_mes = []
+    for gasto in gastos:
+        if gasto["Fecha"].startswith(mes):
+            gastos_mes.append(gasto)
+    return gastos_mes
+    
