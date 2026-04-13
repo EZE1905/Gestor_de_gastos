@@ -1,6 +1,6 @@
 from flask import Flask, render_template,redirect,url_for,request,flash
 import json
-from m_gestor_de_gastos import leer_gastos,agregar_gasto,ordenar_gastos,calcular_gastos,eliminar_gasto,calcular_por_categoria,filtrar_mes,meses
+from m_gestor_de_gastos import total_meses,leer_gastos,agregar_gasto,ordenar_gastos,calcular_gastos,eliminar_gasto,calcular_por_categoria,filtrar_mes,meses
 
 app = Flask(__name__)
 app.secret_key = 'super_secret_key' # Necesario para sesiones
@@ -75,7 +75,8 @@ def resumen():
         "ingresos" : total_ingresos,
         "saldo" : saldo
     }
-    return render_template('resumen.html',mes_titulo = mes_titulo,mes = mes,gastos_mes=gastos_mes,cat_gastos=cat_gastos,cat_ingresos=cat_ingresos,totales=totales)
+    total_por_mes = total_meses(gastos)
+    return render_template('resumen.html',total_por_mes=total_por_mes,mes_titulo = mes_titulo,mes = mes,gastos_mes=gastos_mes,cat_gastos=cat_gastos,cat_ingresos=cat_ingresos,totales=totales)
 
 def pagina_no_encontrada(error):
     return redirect(url_for("index"))

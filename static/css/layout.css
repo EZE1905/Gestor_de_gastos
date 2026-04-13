@@ -378,6 +378,12 @@ button {
     margin: 30px;
 }
 
+.contenido_evolucion{
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* opcional, centra */
+}
+
 /* GRAFICO */
 .grafico {
     flex: 1;

@@ -54,3 +54,42 @@ let chart_balance = new Chart(grafico_balance,{
         }],
     }
 })
+
+let meses = {
+    "01": "Enero",
+    "02": "Febrero",
+    "03": "Marzo",
+    "04": "Abril",
+    "05": "Mayo",
+    "06": "Junio",
+    "07": "Julio",
+    "08": "Agosto",
+    "09": "Septiembre",
+    "10": "Octubre",
+    "11": "Noviembre",
+    "12": "Diciembre"
+}
+
+let labels_totales_mes = Object.keys(window.datos_total_por_mes).map(fecha => {
+    let partes = fecha.split("-")
+    let mes_num = partes[1]
+    return meses[mes_num]
+})
+
+let data_totales_mes = Object.values(window.datos_total_por_mes)
+
+let grafico_linea = document.getElementById("evolucion").getContext("2d")
+let chart_linea = new Chart(grafico_linea,{
+    type:"line",
+    data:{
+        labels:labels_totales_mes,
+        datasets:[{
+            label:"evolucion",
+            data:data_totales_mes,
+            tension: 0.3,
+            borderColor: "#3b82f6",
+            backgroundColor: "rgba(59,130,246,0.2)",
+            fill: true
+        }]
+    }
+})

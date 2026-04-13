@@ -71,12 +71,33 @@ def meses(mes):
         ano = resultado[0]
         mes_format = resultado[1]
         mesesformat = {
-            "01" : "enero",
-            "02" : "febrero",
-            "03" : "marzo"
+            "01": "Enero",
+            "02": "Febrero",
+            "03": "Marzo",
+            "04": "Abril",
+            "05": "Mayo",
+            "06": "Junio",
+            "07": "Julio",
+            "08": "Agosto",
+            "09": "Septiembre",
+            "10": "Octubre",
+            "11": "Noviembre",
+            "12": "Diciembre"
         }
         mesmarcado = mesesformat[mes_format].capitalize()
         mestitulo = mesmarcado + " " + ano
     else:
         mestitulo = "Todos los movimientos"
     return mestitulo
+
+def total_meses(gastos):
+    total_por_mes = {}
+    for gasto in gastos:
+        fecha = gasto["Fecha"].split("-")
+        fecha_mes = fecha[0] + "-" + fecha[1]
+        monto = gasto["Monto"]
+        if fecha_mes in total_por_mes:
+            total_por_mes[fecha_mes] = total_por_mes[fecha_mes] + monto
+        else:
+            total_por_mes[fecha_mes] = monto
+    return total_por_mes

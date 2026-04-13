@@ -32,8 +32,18 @@
                 <form method="GET" action="/">
                     <select name="mes" class="filtro">
                         <option value="">Todos</option>
+                        <option value="2026-01" {% if mes == "2026-01" %} selected {% endif %}>Enero</option>
                         <option value="2026-02" {% if mes == "2026-02" %} selected {% endif %}>Febrero</option>
                         <option value="2026-03"{% if mes == "2026-03" %} selected {% endif %}>Marzo</option>
+                        <option value="2026-04"{% if mes == "2026-04" %} selected {% endif %}>Abril</option>
+                        <option value="2026-05"{% if mes == "2026-05" %} selected {% endif %}>Mayo</option>
+                        <option value="2026-06"{% if mes == "2026-06" %} selected {% endif %}>Junio</option>
+                        <option value="2026-07"{% if mes == "2026-07" %} selected {% endif %}>Julio</option>
+                        <option value="2026-08"{% if mes == "2026-08" %} selected {% endif %}>Agosto</option>
+                        <option value="2026-09"{% if mes == "2026-09" %} selected {% endif %}>Septiembre</option>
+                        <option value="2026-10"{% if mes == "2026-10" %} selected {% endif %}>Octubre</option>
+                        <option value="2026-11"{% if mes == "2026-11" %} selected {% endif %}>Noviembre</option>
+                        <option value="2026-12"{% if mes == "2026-12" %} selected {% endif %}>Diciembre</option>
                     </select>
                     <button type="submit">Filtrar</button>
                 </form>
