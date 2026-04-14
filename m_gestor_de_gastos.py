@@ -91,13 +91,20 @@ def meses(mes):
     return mestitulo
 
 def total_meses(gastos):
-    total_por_mes = {}
+    ingresos_meses = {}
+    gastos_meses = {}
     for gasto in gastos:
         fecha = gasto["Fecha"].split("-")
         fecha_mes = fecha[0] + "-" + fecha[1]
         monto = gasto["Monto"]
-        if fecha_mes in total_por_mes:
-            total_por_mes[fecha_mes] = total_por_mes[fecha_mes] + monto
-        else:
-            total_por_mes[fecha_mes] = monto
-    return total_por_mes
+        if gasto["Tipo"] == "ingreso":
+            if fecha_mes in ingresos_meses:
+                ingresos_meses[fecha_mes] = ingresos_meses[fecha_mes] + monto
+            else:
+                ingresos_meses[fecha_mes] = monto
+        elif gasto["Tipo"] == "gasto":
+            if fecha_mes in gastos_meses:
+                gastos_meses[fecha_mes] = gastos_meses[fecha_mes] + monto
+            else:
+                gastos_meses[fecha_mes] = monto
+    return ingresos_meses, gastos_meses

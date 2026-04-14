@@ -75,8 +75,8 @@ def resumen():
         "ingresos" : total_ingresos,
         "saldo" : saldo
     }
-    total_por_mes = total_meses(gastos)
-    return render_template('resumen.html',total_por_mes=total_por_mes,mes_titulo = mes_titulo,mes = mes,gastos_mes=gastos_mes,cat_gastos=cat_gastos,cat_ingresos=cat_ingresos,totales=totales)
+    ingreso,gasto = total_meses(gastos)
+    return render_template('resumen.html',ingreso=ingreso,gasto=gasto,mes_titulo = mes_titulo,mes = mes,gastos_mes=gastos_mes,cat_gastos=cat_gastos,cat_ingresos=cat_ingresos,totales=totales)
 
 def pagina_no_encontrada(error):
     return redirect(url_for("index"))

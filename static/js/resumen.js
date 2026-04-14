@@ -70,13 +70,14 @@ let meses = {
     "12": "Diciembre"
 }
 
-let labels_totales_mes = Object.keys(window.datos_total_por_mes).map(fecha => {
+let labels_totales_mes = Object.keys(window.datos_ingreso_mes).map(fecha => {
     let partes = fecha.split("-")
     let mes_num = partes[1]
     return meses[mes_num]
 })
 
-let data_totales_mes = Object.values(window.datos_total_por_mes)
+let data_ingreso_mes = Object.values(window.datos_ingreso_mes)
+let data_gasto_mes = Object.values(window.datos_gasto_mes)
 
 let grafico_linea = document.getElementById("evolucion").getContext("2d")
 let chart_linea = new Chart(grafico_linea,{
@@ -84,12 +85,24 @@ let chart_linea = new Chart(grafico_linea,{
     data:{
         labels:labels_totales_mes,
         datasets:[{
-            label:"evolucion",
-            data:data_totales_mes,
-            tension: 0.3,
-            borderColor: "#3b82f6",
-            backgroundColor: "rgba(59,130,246,0.2)",
-            fill: true
-        }]
+                label: "Ingresos",
+                data: data_ingreso_mes,
+                borderColor: "#22c55e",
+                backgroundColor: "rgba(34,197,94,0.15)",
+                tension: 0.3,
+                fill: true,
+                pointRadius: 4,
+                pointBackgroundColor: "#22c55e"
+            },
+            {
+                label: "Gastos",
+                data: data_gasto_mes,
+                borderColor: "#ef4444",
+                backgroundColor: "rgba(239,68,68,0.15)",
+                tension: 0.3,
+                fill: true,
+                pointRadius: 4,
+                pointBackgroundColor: "#ef4444"
+            }]
     }
 })

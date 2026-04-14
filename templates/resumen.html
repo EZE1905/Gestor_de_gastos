@@ -96,7 +96,8 @@
     window.datos_gastos = {{ cat_gastos | tojson | safe }};
     window.datos_ingresos = {{ cat_ingresos | tojson | safe }};
     window.datos_totales = {{ totales | tojson | safe }};
-    window.datos_total_por_mes = {{ total_por_mes | tojson | safe }};
+    window.datos_ingreso_mes = {{ ingreso | tojson | safe }};
+    window.datos_gasto_mes = {{ gasto | tojson | safe }};
 </script>
 <script src="{{ url_for('static', filename='js/resumen.js') }}"></script>
 {% endblock %}
