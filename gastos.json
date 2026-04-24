@@ -22,11 +22,5 @@
         "Tipo": "ingreso",
         "Categoria": "arreglo pc",
         "Fecha": "2026-02-08"
-    },
-    {
-        "Monto": 19900,
-        "Tipo": "gasto",
-        "Categoria": "comida",
-        "Fecha": "2026-04-14"
     }
 ]
