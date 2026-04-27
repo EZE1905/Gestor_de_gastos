@@ -1,35 +1,35 @@
 import json
 from datetime import datetime
 
-def leer_gastos():
+def leer_movimientos():
     try:
-        with open ("gastos.json") as archivo:
+        with open ("movimientos.json") as archivo:
             #leemos el json
-            gastos = json.load(archivo)
+            movimientos = json.load(archivo)
     except FileNotFoundError:
-        with open("gastos.json", "w") as archivo:
-            #gastos es lo que quiero guardar y archivo es en donde lo quiero guardar
-            gastos = json.dump(gastos,archivo)
-    return gastos
+        with open("movimientos.json", "w") as archivo:
+            #movimientos es lo que quiero guardar y archivo es en donde lo quiero guardar
+            movimientos = json.dump(movimientos,archivo)
+    return movimientos
     
-def agregar_gasto(gastos,gasto):
-            gastos.append(gasto)
-            with open ("gastos.json", "w") as archivo:
-                json.dump(gastos,archivo,indent=4) 
+def agregar_gasto(movimientos,gasto):
+            movimientos.append(gasto)
+            with open ("movimientos.json", "w") as archivo:
+                json.dump(movimientos,archivo,indent=4) 
 
-def eliminar_gasto(gastos,indice):
-    gastos.pop(indice)
-    with open ("gastos.json", "w") as archivo:
-        json.dump(gastos,archivo,indent=4) 
-        return gastos
+def eliminar_gasto(movimientos,indice):
+    movimientos.pop(indice)
+    with open ("movimientos.json", "w") as archivo:
+        json.dump(movimientos,archivo,indent=4) 
+        return movimientos
 
-def ordenar_gastos(gastos):
-    gastos.sort(key = lambda gasto: datetime.strptime(gasto["Fecha"],"%Y-%m-%d") , reverse = True)
+def ordenar_movimientos(movimientos):
+    movimientos.sort(key = lambda gasto: datetime.strptime(gasto["Fecha"],"%Y-%m-%d") , reverse = True)
 
-def calcular_gastos(gastos_mes):
+def calcular_movimientos(movimientos_mes):
     total_ingresos = 0
     total_gastado = 0
-    for gasto in gastos_mes:
+    for gasto in movimientos_mes:
         if gasto["Tipo"] == "ingreso":
             total_ingresos = total_ingresos + gasto["Monto"]
         elif gasto["Tipo"] == "gasto":
@@ -37,10 +37,10 @@ def calcular_gastos(gastos_mes):
     saldo = total_ingresos - total_gastado
     return saldo,total_gastado,total_ingresos
 
-def calcular_por_categoria(gastos_mes):
+def calcular_por_categoria(movimientos_mes):
     cat_ingresos = {}
-    cat_gastos = {}
-    for gasto in gastos_mes:
+    cat_movimientos = {}
+    for gasto in movimientos_mes:
         categoria = gasto["Categoria"]
         monto = gasto["Monto"]
         if gasto["Tipo"] == "ingreso":
@@ -49,21 +49,21 @@ def calcular_por_categoria(gastos_mes):
             else:
                 cat_ingresos[categoria] = monto
         elif gasto["Tipo"] == "gasto":
-            if categoria in cat_gastos:
-                cat_gastos[categoria] = cat_gastos[categoria] + monto
+            if categoria in cat_movimientos:
+                cat_movimientos[categoria] = cat_movimientos[categoria] + monto
             else:
-                cat_gastos[categoria] = monto
-    return cat_gastos, cat_ingresos
+                cat_movimientos[categoria] = monto
+    return cat_movimientos, cat_ingresos
 
-def filtrar_mes(mes,gastos):
-    gastos_mes = []
+def filtrar_mes(mes,movimientos):
+    movimientos_mes = []
     if mes:
-        for gasto in gastos:
+        for gasto in movimientos:
             if gasto["Fecha"].startswith(mes):
-                gastos_mes.append(gasto)
-        return gastos_mes
+                movimientos_mes.append(gasto)
+        return movimientos_mes
     else:
-        return gastos
+        return movimientos
 
 def meses(mes):
     if mes: 
@@ -90,10 +90,10 @@ def meses(mes):
         mestitulo = "Todos los movimientos"
     return mestitulo
 
-def total_meses(gastos):
+def total_meses(movimientos):
     ingresos_meses = {}
-    gastos_meses = {}
-    for gasto in gastos:
+    movimientos_meses = {}
+    for gasto in movimientos:
         fecha = gasto["Fecha"].split("-")
         fecha_mes = fecha[0] + "-" + fecha[1]
         monto = gasto["Monto"]
@@ -103,8 +103,8 @@ def total_meses(gastos):
             else:
                 ingresos_meses[fecha_mes] = monto
         elif gasto["Tipo"] == "gasto":
-            if fecha_mes in gastos_meses:
-                gastos_meses[fecha_mes] = gastos_meses[fecha_mes] + monto
+            if fecha_mes in movimientos_meses:
+                movimientos_meses[fecha_mes] = movimientos_meses[fecha_mes] + monto
             else:
-                gastos_meses[fecha_mes] = monto
-    return ingresos_meses, gastos_meses
+                movimientos_meses[fecha_mes] = monto
+    return ingresos_meses, movimientos_meses

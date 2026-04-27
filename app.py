@@ -1,24 +1,25 @@
 from flask import Flask, render_template,redirect,url_for,request,flash
 import json
-from m_gestor_de_gastos import total_meses,leer_gastos,agregar_gasto,ordenar_gastos,calcular_gastos,eliminar_gasto,calcular_por_categoria,filtrar_mes,meses
+from m_gestor_de_gastos import total_meses,leer_movimientos,agregar_gasto,ordenar_movimientos,calcular_movimientos,eliminar_gasto,calcular_por_categoria,filtrar_mes,meses
+from m_gestor_gastos_sql import obtener_movimientos
 
 app = Flask(__name__)
 app.secret_key = 'super_secret_key' # Necesario para sesiones
 
-gastos = leer_gastos()
+movimientos = obtener_movimientos()
 
 @app.route("/")
 def home():
     #return "Hola Flask!"
     mes = request.args.get("mes")
-    gastos_mes = filtrar_mes(mes,gastos)
+    movimientos_mes = filtrar_mes(mes,movimientos)
     mes_titulo = meses(mes)
-    ordenar_gastos(gastos)
-    saldo, total_gastado, total_ingresos = calcular_gastos(gastos_mes)
+    ordenar_movimientos(movimientos)
+    saldo, total_gastado, total_ingresos = calcular_movimientos(movimientos_mes)
     saldo_formateado = f"{saldo:,}".replace(",", ".")
     ingreso_formateado = f"{total_ingresos:,}".replace(",", ".")
     gasto_formateado = f"{total_gastado:,}".replace(",", ".")
-    return render_template('index.html',mes_titulo=mes_titulo,mes=mes,gastos_mes=gastos_mes, gastos=gastos,saldo = saldo_formateado,total_gastado = gasto_formateado,total_ingresos = ingreso_formateado )
+    return render_template('index.html',mes_titulo=mes_titulo,mes=mes,movimientos_mes=movimientos_mes, movimientos=movimientos,saldo = saldo_formateado,total_gastado = gasto_formateado,total_ingresos = ingreso_formateado )
 
 @app.route("/agregar_datos", methods = ["POST", "GET"])
 def agregar():
@@ -29,7 +30,7 @@ def agregar():
             "Categoria" : request.form["categoria"],
             "Fecha" : request.form["fecha"]
          }
-        agregar_gasto(gastos,gasto)
+        agregar_gasto(movimientos,gasto)
         flash('Dato agregado correctamente','success') # Mensaje flash
         return redirect('/')
     else:
@@ -38,7 +39,7 @@ def agregar():
 @app.route("/eliminar", methods = ["POST"])
 def eliminar():
     indice = int(request.form["indice"])
-    eliminar_gasto(gastos,indice)
+    eliminar_gasto(movimientos,indice)
     flash('Dato eliminado correctamente','error') # Mensaje flash
     return redirect("/")
 
@@ -47,7 +48,7 @@ def editar():
     if request.method == "GET":
         indice = request.args.get("indice")
         indice = int(indice)
-        gasto = gastos[indice]
+        gasto = movimientos[indice]
         return render_template('editar.html',gasto = gasto,indice = indice)
     elif request.method == "POST":
         nuevo_gasto = {
@@ -57,26 +58,26 @@ def editar():
             "Fecha" : request.form["fecha"]
         }
         indice = int(request.form["indice"])
-        gastos[indice] = nuevo_gasto
-        with open ("gastos.json", "w") as archivo:
-            json.dump(gastos,archivo,indent=4) 
+        movimientos[indice] = nuevo_gasto
+        with open ("movimientos.json", "w") as archivo:
+            json.dump(movimientos,archivo,indent=4) 
         flash('Dato editado correctamente','info') # Mensaje flash
         return redirect("/")
 
 @app.route("/resumen")
 def resumen():
     mes = request.args.get("mes")
-    gastos_mes = filtrar_mes(mes,gastos)
+    movimientos_mes = filtrar_mes(mes,movimientos)
     mes_titulo = meses(mes)
-    cat_gastos, cat_ingresos = calcular_por_categoria(gastos_mes)
-    saldo, total_gastado, total_ingresos = calcular_gastos(gastos_mes)
+    cat_movimientos, cat_ingresos = calcular_por_categoria(movimientos_mes)
+    saldo, total_gastado, total_ingresos = calcular_movimientos(movimientos_mes)
     totales = {
-        "gastos" : total_gastado,
+        "movimientos" : total_gastado,
         "ingresos" : total_ingresos,
         "saldo" : saldo
     }
-    ingreso,gasto = total_meses(gastos)
-    return render_template('resumen.html',ingreso=ingreso,gasto=gasto,mes_titulo = mes_titulo,mes = mes,gastos_mes=gastos_mes,cat_gastos=cat_gastos,cat_ingresos=cat_ingresos,totales=totales)
+    ingreso,gasto = total_meses(movimientos)
+    return render_template('resumen.html',ingreso=ingreso,gasto=gasto,mes_titulo = mes_titulo,mes = mes,movimientos_mes=movimientos_mes,cat_movimientos=cat_movimientos,cat_ingresos=cat_ingresos,totales=totales)
 
 def pagina_no_encontrada(error):
     return redirect(url_for("index"))

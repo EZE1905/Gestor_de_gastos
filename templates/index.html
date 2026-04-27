@@ -1,6 +1,6 @@
 {% extends './layout.html' %}
 
-{% block title %}Gestor de gastos{% endblock %}
+{% block title %}Gestor de movimientos{% endblock %}
 
 {% block body %}
     <div class="container">
@@ -15,7 +15,7 @@
                 <p class="ingreso">${{ total_ingresos }}</p>
             </div>
             <div>
-                <h3 class="detalles">Gastos</h3>
+                <h3 class="detalles">movimientos</h3>
                 <p class="gasto">${{ total_gastado }}</p>
             </div>
         </div>
@@ -59,7 +59,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for gasto in gastos_mes %}
+                    {% for gasto in movimientos_mes %}
                     <tr>
                         <td>{{ gasto.Fecha }}</td>
                         <td class="{{ 'ingreso' if gasto.Tipo == 'ingreso' else 'gasto'  }}">{{ gasto.Tipo }}</td>
