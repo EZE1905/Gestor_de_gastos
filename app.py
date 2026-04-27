@@ -1,36 +1,27 @@
 from flask import Flask, render_template,redirect,url_for,request,flash
 import json
-from m_gestor_de_gastos import total_meses,leer_movimientos,agregar_gasto,ordenar_movimientos,calcular_movimientos,eliminar_gasto,calcular_por_categoria,filtrar_mes,meses
-from m_gestor_gastos_sql import obtener_movimientos
+#from m_gestor_de_gastos import total_meses,leer_movimientos,agregar_gasto,ordenar_movimientos,calcular_movimientos,eliminar_gasto,calcular_por_categoria,filtrar_mes,meses
+from m_gestor_gastos_sql import obtener_movimientos,calcular_movimientos,agregar_movimiento
 
 app = Flask(__name__)
 app.secret_key = 'super_secret_key' # Necesario para sesiones
 
-movimientos = obtener_movimientos()
 
 @app.route("/")
 def home():
-    #return "Hola Flask!"
-    mes = request.args.get("mes")
-    movimientos_mes = filtrar_mes(mes,movimientos)
-    mes_titulo = meses(mes)
-    ordenar_movimientos(movimientos)
-    saldo, total_gastado, total_ingresos = calcular_movimientos(movimientos_mes)
-    saldo_formateado = f"{saldo:,}".replace(",", ".")
-    ingreso_formateado = f"{total_ingresos:,}".replace(",", ".")
-    gasto_formateado = f"{total_gastado:,}".replace(",", ".")
-    return render_template('index.html',mes_titulo=mes_titulo,mes=mes,movimientos_mes=movimientos_mes, movimientos=movimientos,saldo = saldo_formateado,total_gastado = gasto_formateado,total_ingresos = ingreso_formateado )
+    movimientos = obtener_movimientos()
+    saldo,total_gastado,total_ingresos = calcular_movimientos(movimientos)
+    return render_template('index.html',movimientos=movimientos,saldo=saldo,total_gastado=total_gastado,total_ingresos=total_ingresos)
 
 @app.route("/agregar_datos", methods = ["POST", "GET"])
 def agregar():
     if request.method == "POST":
-        gasto = {
-            "Monto" : int(request.form["monto"]),
-            "Tipo" : request.form["tipo"],
-            "Categoria" : request.form["categoria"],
-            "Fecha" : request.form["fecha"]
-         }
-        agregar_gasto(movimientos,gasto)
+        id_usuario = 1
+        monto = int(request.form["monto"])
+        tipo = request.form["tipo"]
+        categoria = request.form["categoria"]
+        fecha = request.form["fecha"]
+        agregar_movimiento(id_usuario,monto,tipo,categoria,fecha)
         flash('Dato agregado correctamente','success') # Mensaje flash
         return redirect('/')
     else:

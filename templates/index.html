@@ -8,15 +8,15 @@
         <div class="card resumen">
             <div>
                 <h3 class="detalles">Saldo</h3>
-                <p>${{ saldo }}</p>
+                <p>${{ "{:,}".format(saldo).replace(",",".") }}</p>
             </div>
             <div>
                 <h3 class="detalles">Ingresos</h3>
-                <p class="ingreso">${{ total_ingresos }}</p>
+                <p class="ingreso">${{ "{:,}".format(total_ingresos).replace(",",".") }}</p>
             </div>
             <div>
                 <h3 class="detalles">movimientos</h3>
-                <p class="gasto">${{ total_gastado }}</p>
+                <p class="gasto">${{ "{:,}".format(total_gastado).replace(",",".") }}</p>
             </div>
         </div>
 
@@ -59,12 +59,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for gasto in movimientos_mes %}
+                    {% for movimiento in movimientos %}
                     <tr>
-                        <td>{{ gasto.Fecha }}</td>
-                        <td class="{{ 'ingreso' if gasto.Tipo == 'ingreso' else 'gasto'  }}">{{ gasto.Tipo }}</td>
-                        <td>{{ gasto.Categoria }}</td>
-                        <td>${{ "{:,}".format(gasto['Monto']).replace(",",".") }}</td>
+                        <td>{{ movimiento.Fecha }}</td>
+                        <td class="{{ 'ingreso' if movimiento.Tipo == 'ingreso' else 'gasto'  }}">{{ movimiento.Tipo }}</td>
+                        <td>{{ movimiento.Categoria }}</td>
+                        <td>${{ "{:,}".format(movimiento['Monto']).replace(",",".") }}</td>
                         <td>
                             <div class="botones">
                                 <form action="/editar" method="GET">

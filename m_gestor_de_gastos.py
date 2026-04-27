@@ -26,14 +26,14 @@ def eliminar_gasto(movimientos,indice):
 def ordenar_movimientos(movimientos):
     movimientos.sort(key = lambda gasto: datetime.strptime(gasto["Fecha"],"%Y-%m-%d") , reverse = True)
 
-def calcular_movimientos(movimientos_mes):
+def calcular_movimientos(movimientos):
     total_ingresos = 0
     total_gastado = 0
-    for gasto in movimientos_mes:
-        if gasto["Tipo"] == "ingreso":
-            total_ingresos = total_ingresos + gasto["Monto"]
-        elif gasto["Tipo"] == "gasto":
-            total_gastado = total_gastado + gasto["Monto"]
+    for movimiento in movimientos:
+        if movimiento["Tipo"] == "ingreso":
+            total_ingresos = total_ingresos + movimiento["Monto"]
+        elif movimiento["Tipo"] == "gasto":
+            total_gastado = total_gastado + movimiento["Monto"]
     saldo = total_ingresos - total_gastado
     return saldo,total_gastado,total_ingresos
 
@@ -54,16 +54,6 @@ def calcular_por_categoria(movimientos_mes):
             else:
                 cat_movimientos[categoria] = monto
     return cat_movimientos, cat_ingresos
-
-def filtrar_mes(mes,movimientos):
-    movimientos_mes = []
-    if mes:
-        for gasto in movimientos:
-            if gasto["Fecha"].startswith(mes):
-                movimientos_mes.append(gasto)
-        return movimientos_mes
-    else:
-        return movimientos
 
 def meses(mes):
     if mes: 
