@@ -25,4 +25,8 @@ def agregar_movimiento(id_usuario,monto,categoria,tipo,fecha):
         cursor.execute('INSERT INTO movimientos (id_usuario,monto,categoria,tipo,fecha) VALUES (?,?,?,?,?)',(id_usuario,monto,tipo,categoria,fecha))
         conn.commit()
 
-def eliminar_movimiento(indice):
+def eliminar_movimiento(id_movimiento):
+    with sqlite3.connect("database/gastos.db") as conn:
+        cursor = conn.cursor()
+        cursor.execute('DELETE FROM movimientos WHERE id_movimiento = ?',(id_movimiento,))
+        conn.commit()

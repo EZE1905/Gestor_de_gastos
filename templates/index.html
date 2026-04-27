@@ -68,11 +68,11 @@
                         <td>
                             <div class="botones">
                                 <form action="/editar" method="GET">
-                                <input type="hidden" name="indice" value="{{ loop.index0 }}">
+                                <input type="hidden" name="id_movimiento" value="{{ movimiento.id_movimiento }}">
                                 <button class="btn-editar">Editar</button>
                                 </form>
                                 <form action="/eliminar" method="POST">
-                                <input type="hidden" name="indice" value="{{ loop.index0 }}">
+                                <input type="hidden" name="id_movimiento" value="{{ movimiento.id_movimiento }}">
                                 <button class="btn-eliminar">Eliminar</button>
                                 </form>
                             </div>

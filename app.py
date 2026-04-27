@@ -1,7 +1,7 @@
 from flask import Flask, render_template,redirect,url_for,request,flash
 import json
 #from m_gestor_de_gastos import total_meses,leer_movimientos,agregar_gasto,ordenar_movimientos,calcular_movimientos,eliminar_gasto,calcular_por_categoria,filtrar_mes,meses
-from m_gestor_gastos_sql import obtener_movimientos,calcular_movimientos,agregar_movimiento
+from m_gestor_gastos_sql import obtener_movimientos,calcular_movimientos,agregar_movimiento,eliminar_movimiento
 
 app = Flask(__name__)
 app.secret_key = 'super_secret_key' # Necesario para sesiones
@@ -29,8 +29,8 @@ def agregar():
 
 @app.route("/eliminar", methods = ["POST"])
 def eliminar():
-    indice = int(request.form["indice"])
-    eliminar_gasto(movimientos,indice)
+    id_movimiento = request.form["id_movimiento"]
+    eliminar_movimiento(id_movimiento)
     flash('Dato eliminado correctamente','error') # Mensaje flash
     return redirect("/")
 
