@@ -5,11 +5,7 @@
 {% block body %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.umd.js"></script>
 <div class="contenedor_titulo_filtro contenedor_resumen">
-    {% if mes %}
-        <h3 class="subtitulo">Resumen de {{ mes_titulo }}</h3>
-    {% else %}
-        <h3 class="subtitulo">{{ mes_titulo }}</h3>
-    {% endif %}
+    <h3 class="subtitulo">{{ mestitulo }}</h3>
     <!-- FILTRO -->
     <form method="GET" action="/resumen">
         <select name="mes" class="filtro">
@@ -27,23 +23,23 @@
             <option value="2026-11"{% if mes == "2026-11" %} selected {% endif %}>Noviembre</option>
             <option value="2026-12"{% if mes == "2026-12" %} selected {% endif %}>Diciembre</option>
         </select>
-        <button type="submit">Filtrar</button>
+        <button type="submit" class="btn-filtrar">Filtrar</button>
     </form>
 </div>
 <div class="seccion">
     <div class="contenido">
         <div class="grafico">
-            <canvas id="movimientos"></canvas>
+            <canvas id="gastos"></canvas>
         </div>
         <div class="resumen_chart">
-            <h2>movimientos</h2>
-            <p>Resumen de movimientos</p>
+            <h2>Gastos</h2>
+            <p>Resumen de gastos</p>
             <br>
-            {% for clave,valor in cat_movimientos.items() %}
+            {% for clave,valor in cat_gastos.items() %}
             <p>{{ clave }}: ${{ "{:,}".format(valor).replace(",",".") }}</p>
             {% endfor %}
             <br>
-            <p>Total gastado: ${{ "{:,}".format(totales.movimientos).replace(",",".") }}</p>
+            <p>Total gastado: ${{ "{:,}".format(totales.gastos).replace(",",".") }}</p>
         </div>
     </div>
 </div>
@@ -77,7 +73,7 @@
             <br>
             <p>Total ingresos: ${{ "{:,}".format(totales.ingresos).replace(",",".") }}</p>
             <br>
-            <p>Total movimientos: ${{ "{:,}".format(totales.movimientos).replace(",",".") }}</p>
+            <p>Total movimientos: ${{ "{:,}".format(totales.gastos).replace(",",".") }}</p>
             <br>
             <p>Saldo disponible: ${{ "{:,}".format(totales.saldo).replace(",",".") }}</p>
         </div>
@@ -93,7 +89,7 @@
     </div>
 </div>
 <script>
-    window.datos_movimientos = {{ cat_movimientos | tojson | safe }};
+    window.datos_gastos = {{ cat_gastos | tojson | safe }};
     window.datos_ingresos = {{ cat_ingresos | tojson | safe }};
     window.datos_totales = {{ totales | tojson | safe }};
     window.datos_ingreso_mes = {{ ingreso | tojson | safe }};

@@ -108,7 +108,7 @@ nav a:hover::after {
 }
 
 /* BOTON */
-.contenedor_titulo_filtro button {
+.btn-filtrar {
     padding: 6px 12px;
     border: none;
     border-radius: 6px;
@@ -116,12 +116,48 @@ nav a:hover::after {
     color: white;
     font-size: 0.85rem;
     cursor: pointer;
-    transition: 0.2s;
+    transition: all 0.3s ease;
 }
 
 /* HOVER BOTON */
-.contenedor_titulo_filtro button:hover {
+.btn-filtrar:hover {
     background-color: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 12px rgba(184, 242, 217, 0.4);
+}
+
+.btn-ingreso {
+    background-color: #b8f2d9; /* verde pastel */
+    color: #1f4d3a;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.btn-ingreso:hover {
+    background-color: #9eeacb;
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 12px rgba(184, 242, 217, 0.4);
+}
+
+.btn-gastos {
+    background-color: #ffd6d6; /* rojo/rosa pastel */
+    color: #6b2c2c;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.btn-gastos:hover {
+    background-color: #ffc2c2;
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 12px rgba(255, 214, 214, 0.4);
 }
 
 /* CONTENEDOR */

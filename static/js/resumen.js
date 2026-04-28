@@ -1,14 +1,14 @@
-let labels_movimientos = Object.keys(window.datos_movimientos)
-let data_movimientos = Object.values(window.datos_movimientos)
+let labels_gastos = Object.keys(window.datos_gastos)
+let data_gastos = Object.values(window.datos_gastos)
 
-let grafico_movimientos = document.getElementById("movimientos").getContext("2d");
-let migrafico = new Chart(grafico_movimientos,{
+let grafico_gastos = document.getElementById("gastos").getContext("2d");
+let migrafico = new Chart(grafico_gastos,{
     type:"bar",
     data:{
-        labels: labels_movimientos,
+        labels: labels_gastos,
         datasets: [{
-            label: "movimientos",
-            data: data_movimientos,
+            label: "gastos",
+            data: data_gastos,
             backgroundColor:[
                 "#E57373"
             ]
@@ -95,7 +95,7 @@ let chart_linea = new Chart(grafico_linea,{
                 pointBackgroundColor: "#22c55e"
             },
             {
-                label: "movimientos",
+                label: "Gastos",
                 data: data_gasto_mes,
                 borderColor: "#ef4444",
                 backgroundColor: "rgba(239,68,68,0.15)",

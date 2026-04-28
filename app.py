@@ -1,6 +1,5 @@
 from flask import Flask, render_template,redirect,url_for,request,flash
-from m_gestor_gastos_sql import obtener_movimientos,calcular_movimientos,agregar_movimiento,eliminar_movimiento,editar_movimiento,obtener_un_movimiento,obtener_movimientos_por_mes,meses
-
+from m_gestor_gastos_sql import obtener_movimientos,calcular_movimientos,agregar_movimiento,eliminar_movimiento,editar_movimiento,obtener_un_movimiento,obtener_movimientos_por_mes,meses,total_meses,calcular_por_categoria
 app = Flask(__name__)
 app.secret_key = 'super_secret_key' # Necesario para sesiones
 
@@ -53,17 +52,17 @@ def editar():
 @app.route("/resumen")
 def resumen():
     mes = request.args.get("mes")
-    movimientos_mes = filtrar_mes(mes,movimientos)
-    mes_titulo = meses(mes)
-    cat_movimientos, cat_ingresos = calcular_por_categoria(movimientos_mes)
-    saldo, total_gastado, total_ingresos = calcular_movimientos(movimientos_mes)
+    movimientos_por_mes = obtener_movimientos_por_mes(mes)
+    mestitulo = meses(mes)
+    cat_gastos, cat_ingresos = calcular_por_categoria(movimientos_por_mes)
+    saldo, total_gastado, total_ingresos = calcular_movimientos(movimientos_por_mes)
     totales = {
-        "movimientos" : total_gastado,
+        "gastos" : total_gastado,
         "ingresos" : total_ingresos,
         "saldo" : saldo
     }
-    ingreso,gasto = total_meses(movimientos)
-    return render_template('resumen.html',ingreso=ingreso,gasto=gasto,mes_titulo = mes_titulo,mes = mes,movimientos_mes=movimientos_mes,cat_movimientos=cat_movimientos,cat_ingresos=cat_ingresos,totales=totales)
+    ingreso,gasto = total_meses(movimientos_por_mes)
+    return render_template('resumen.html',ingreso=ingreso,gasto=gasto,mestitulo = mestitulo,mes = mes,movimientos_por_mes=movimientos_por_mes,cat_gastos=cat_gastos,cat_ingresos=cat_ingresos,totales=totales)
 
 def pagina_no_encontrada(error):
     return redirect(url_for("index"))

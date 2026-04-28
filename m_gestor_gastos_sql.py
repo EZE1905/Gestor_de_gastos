@@ -83,21 +83,40 @@ def meses(mes):
         mestitulo = "Todos los movimientos"
     return mestitulo
 
-def total_meses(movimientos):
+
+def total_meses(movimientos_por_mes):
     ingresos_meses = {}
     movimientos_meses = {}
-    for gasto in movimientos:
-        fecha = gasto["Fecha"].split("-")
+    for movimiento in movimientos_por_mes:
+        fecha = movimiento["Fecha"].split("-")
         fecha_mes = fecha[0] + "-" + fecha[1]
-        monto = gasto["Monto"]
-        if gasto["Tipo"] == "ingreso":
+        monto = movimiento["Monto"]
+        if movimiento["Tipo"] == "ingreso":
             if fecha_mes in ingresos_meses:
                 ingresos_meses[fecha_mes] = ingresos_meses[fecha_mes] + monto
             else:
                 ingresos_meses[fecha_mes] = monto
-        elif gasto["Tipo"] == "gasto":
+        elif movimiento["Tipo"] == "gasto":
             if fecha_mes in movimientos_meses:
                 movimientos_meses[fecha_mes] = movimientos_meses[fecha_mes] + monto
             else:
                 movimientos_meses[fecha_mes] = monto
     return ingresos_meses, movimientos_meses
+
+def calcular_por_categoria(movimientos_por_mes):
+    cat_ingresos = {}
+    cat_gastos = {}
+    for movimiento in movimientos_por_mes:
+        categoria = movimiento["Categoria"]
+        monto = movimiento["Monto"]
+        if movimiento["Tipo"] == "ingreso":
+            if categoria in cat_ingresos:
+                cat_ingresos[categoria] = cat_ingresos[categoria] + monto
+            else:
+                cat_ingresos[categoria] = monto
+        elif movimiento["Tipo"] == "gasto":
+            if categoria in cat_gastos:
+                cat_gastos[categoria] = cat_gastos[categoria] + monto
+            else:
+                cat_gastos[categoria] = monto
+    return cat_gastos, cat_ingresos
