@@ -1,7 +1,5 @@
 from flask import Flask, render_template,redirect,url_for,request,flash
-import json
-#from m_gestor_de_gastos import total_meses,leer_movimientos,agregar_gasto,ordenar_movimientos,calcular_movimientos,eliminar_gasto,calcular_por_categoria,filtrar_mes,meses
-from m_gestor_gastos_sql import obtener_movimientos,calcular_movimientos,agregar_movimiento,eliminar_movimiento
+from m_gestor_gastos_sql import obtener_movimientos,calcular_movimientos,agregar_movimiento,eliminar_movimiento,editar_movimiento,obtener_un_movimiento,obtener_movimientos_por_mes,meses
 
 app = Flask(__name__)
 app.secret_key = 'super_secret_key' # Necesario para sesiones
@@ -9,9 +7,11 @@ app.secret_key = 'super_secret_key' # Necesario para sesiones
 
 @app.route("/")
 def home():
-    movimientos = obtener_movimientos()
-    saldo,total_gastado,total_ingresos = calcular_movimientos(movimientos)
-    return render_template('index.html',movimientos=movimientos,saldo=saldo,total_gastado=total_gastado,total_ingresos=total_ingresos)
+    mes = request.args.get("mes")
+    movimientos_por_mes = obtener_movimientos_por_mes(mes)
+    mestitulo = meses(mes)
+    saldo,total_gastado,total_ingresos = calcular_movimientos(movimientos_por_mes)
+    return render_template('index.html',saldo=saldo,total_gastado=total_gastado,total_ingresos=total_ingresos,movimientos_por_mes=movimientos_por_mes,mestitulo=mestitulo)
 
 @app.route("/agregar_datos", methods = ["POST", "GET"])
 def agregar():
@@ -21,7 +21,7 @@ def agregar():
         tipo = request.form["tipo"]
         categoria = request.form["categoria"]
         fecha = request.form["fecha"]
-        agregar_movimiento(id_usuario,monto,tipo,categoria,fecha)
+        agregar_movimiento(id_usuario,monto,categoria,tipo,fecha)
         flash('Dato agregado correctamente','success') # Mensaje flash
         return redirect('/')
     else:
@@ -37,21 +37,16 @@ def eliminar():
 @app.route("/editar", methods = ["GET", "POST"])
 def editar():
     if request.method == "GET":
-        indice = request.args.get("indice")
-        indice = int(indice)
-        gasto = movimientos[indice]
-        return render_template('editar.html',gasto = gasto,indice = indice)
+        id_movimiento = request.args.get("id_movimiento")
+        movimiento = obtener_un_movimiento(id_movimiento)
+        return render_template('editar.html',movimiento=movimiento)
     elif request.method == "POST":
-        nuevo_gasto = {
-            "Monto" : int(request.form["monto"]),
-            "Tipo" : request.form["tipo"],
-            "Categoria" : request.form["categoria"],
-            "Fecha" : request.form["fecha"]
-        }
-        indice = int(request.form["indice"])
-        movimientos[indice] = nuevo_gasto
-        with open ("movimientos.json", "w") as archivo:
-            json.dump(movimientos,archivo,indent=4) 
+        id_movimiento = request.form["id_movimiento"]
+        monto = request.form["monto"]
+        tipo = request.form["tipo"]
+        categoria = request.form["categoria"]
+        fecha = request.form["fecha"]
+        editar_movimiento(id_movimiento,monto,tipo,categoria,fecha)
         flash('Dato editado correctamente','info') # Mensaje flash
         return redirect("/")
 

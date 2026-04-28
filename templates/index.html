@@ -23,11 +23,7 @@
         <!-- LISTA DE MOVIMIENTOS -->
         <div class="card">
             <div class="contenedor_titulo_filtro">
-                {% if mes %}
-                    <h3 class="subtitulo">Movimientos de {{ mes_titulo }}</h3>
-                {% else %}
-                    <h3 class="subtitulo">{{ mes_titulo }}</h3>
-                {% endif %}
+                    <h3 class="subtitulo">{{ mestitulo }}</h3>
                 <!-- FILTRO -->
                 <form method="GET" action="/">
                     <select name="mes" class="filtro">
@@ -59,7 +55,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for movimiento in movimientos %}
+                    {% for movimiento in movimientos_por_mes %}
                     <tr>
                         <td>{{ movimiento.Fecha }}</td>
                         <td class="{{ 'ingreso' if movimiento.Tipo == 'ingreso' else 'gasto'  }}">{{ movimiento.Tipo }}</td>
@@ -67,7 +63,7 @@
                         <td>${{ "{:,}".format(movimiento['Monto']).replace(",",".") }}</td>
                         <td>
                             <div class="botones">
-                                <form action="/editar" method="GET">
+                                <form action="/editar" method="GET POST">
                                 <input type="hidden" name="id_movimiento" value="{{ movimiento.id_movimiento }}">
                                 <button class="btn-editar">Editar</button>
                                 </form>
