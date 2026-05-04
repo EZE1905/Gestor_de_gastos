@@ -8,10 +8,10 @@ def obtener_movimientos():
         movimientos = cursor.fetchall()
     return movimientos
 
-def calcular_movimientos(movimientos):
+def calcular_movimientos(movimientos_por_mes):
     total_ingresos = 0
     total_gastado = 0
-    for movimiento in movimientos:
+    for movimiento in movimientos_por_mes:
         if movimiento["Tipo"] == "ingreso":
             total_ingresos = total_ingresos + movimiento["Monto"]
         elif movimiento["Tipo"] == "gasto":
@@ -84,10 +84,10 @@ def meses(mes):
     return mestitulo
 
 
-def total_meses(movimientos_por_mes):
+def total_meses(movimientos):
     ingresos_meses = {}
-    movimientos_meses = {}
-    for movimiento in movimientos_por_mes:
+    gastos_meses = {}
+    for movimiento in movimientos:
         fecha = movimiento["Fecha"].split("-")
         fecha_mes = fecha[0] + "-" + fecha[1]
         monto = movimiento["Monto"]
@@ -97,11 +97,11 @@ def total_meses(movimientos_por_mes):
             else:
                 ingresos_meses[fecha_mes] = monto
         elif movimiento["Tipo"] == "gasto":
-            if fecha_mes in movimientos_meses:
-                movimientos_meses[fecha_mes] = movimientos_meses[fecha_mes] + monto
+            if fecha_mes in gastos_meses:
+                gastos_meses[fecha_mes] = gastos_meses[fecha_mes] + monto
             else:
-                movimientos_meses[fecha_mes] = monto
-    return ingresos_meses, movimientos_meses
+                gastos_meses[fecha_mes] = monto
+    return ingresos_meses, gastos_meses
 
 def calcular_por_categoria(movimientos_por_mes):
     cat_ingresos = {}

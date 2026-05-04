@@ -61,8 +61,9 @@ def resumen():
         "ingresos" : total_ingresos,
         "saldo" : saldo
     }
-    ingreso,gasto = total_meses(movimientos_por_mes)
-    return render_template('resumen.html',ingreso=ingreso,gasto=gasto,mestitulo = mestitulo,mes = mes,movimientos_por_mes=movimientos_por_mes,cat_gastos=cat_gastos,cat_ingresos=cat_ingresos,totales=totales)
+    movimientos = obtener_movimientos()
+    ingresos_meses,gastos_meses = total_meses(movimientos)
+    return render_template('resumen.html',ingresos_meses=ingresos_meses,gastos_meses=gastos_meses,mestitulo = mestitulo,mes = mes,movimientos_por_mes=movimientos_por_mes,cat_gastos=cat_gastos,cat_ingresos=cat_ingresos,totales=totales)
 
 def pagina_no_encontrada(error):
     return redirect(url_for("index"))

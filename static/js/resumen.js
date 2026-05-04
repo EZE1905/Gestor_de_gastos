@@ -55,6 +55,18 @@ let chart_balance = new Chart(grafico_balance,{
     }
 })
 
+let datosIngresos = window.datos_ingreso_mes || {}
+let datosGastos = window.datos_gasto_mes || {}
+
+// 🔹 Unimos todos los meses (ingresos + gastos)
+let labels_keys = Array.from(
+    new Set([
+        ...Object.keys(datosIngresos),
+        ...Object.keys(datosGastos)
+    ])
+).sort()
+
+// 🔹 Diccionario de meses
 let meses = {
     "01": "Enero",
     "02": "Febrero",
@@ -70,29 +82,32 @@ let meses = {
     "12": "Diciembre"
 }
 
-let labels_totales_mes = Object.keys(window.datos_ingreso_mes).map(fecha => {
-    let partes = fecha.split("-")
-    let mes_num = partes[1]
-    return meses[mes_num]
+// 🔹 Labels bonitas (Abril 2026)
+let labels = labels_keys.map(fecha => {
+    let [anio, mes] = fecha.split("-")
+    return `${meses[mes]} ${anio}`
 })
 
-let data_ingreso_mes = Object.values(window.datos_ingreso_mes)
-let data_gasto_mes = Object.values(window.datos_gasto_mes)
+// 🔹 Data alineada (clave del fix)
+let data_ingreso_mes = labels_keys.map(mes => datosIngresos[mes] || 0)
+let data_gasto_mes = labels_keys.map(mes => datosGastos[mes] || 0)
 
+// 🔹 Gráfico
 let grafico_linea = document.getElementById("evolucion").getContext("2d")
-let chart_linea = new Chart(grafico_linea,{
-    type:"line",
-    data:{
-        labels:labels_totales_mes,
-        datasets:[{
+
+let chart_linea = new Chart(grafico_linea, {
+    type: "line",
+    data: {
+        labels: labels,
+        datasets: [
+            {
                 label: "Ingresos",
                 data: data_ingreso_mes,
                 borderColor: "#22c55e",
                 backgroundColor: "rgba(34,197,94,0.15)",
                 tension: 0.3,
                 fill: true,
-                pointRadius: 4,
-                pointBackgroundColor: "#22c55e"
+                pointRadius: 4
             },
             {
                 label: "Gastos",
@@ -101,8 +116,8 @@ let chart_linea = new Chart(grafico_linea,{
                 backgroundColor: "rgba(239,68,68,0.15)",
                 tension: 0.3,
                 fill: true,
-                pointRadius: 4,
-                pointBackgroundColor: "#ef4444"
-            }]
+                pointRadius: 4
+            }
+        ]
     }
 })
