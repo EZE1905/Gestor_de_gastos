@@ -119,5 +119,28 @@ let chart_linea = new Chart(grafico_linea, {
                 pointRadius: 4
             }
         ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        devicePixelRatio: window.devicePixelRatio || 1,
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    callback: value => value.toLocaleString('es-ES')
+                }
+            }
+        },
+        plugins: {
+            legend: {
+                position: 'top'
+            },
+            tooltip: {
+                callbacks: {
+                    label: context => `${context.dataset.label}: $${context.parsed.y.toLocaleString('es-ES')}`
+                }
+            }
+        }
     }
 })

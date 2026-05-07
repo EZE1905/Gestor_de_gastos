@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}Iniciar Sesión{% endblock %}
+
+{% block body_class %}auth-no-scroll{% endblock %}
+
+{% block body %}
+<div class="container auth-page">
+    <div class="auth-presentation">
+        <span class="app-title">Gestor de Finanzas</span>
+        <p class="app-tagline">Administra tus ingresos y gastos desde un lugar seguro.</p>
+    </div>
+    <div class="card auth-card">
+        <h1>Iniciar Sesión</h1>
+        <p class="auth-subtitle">Accede a tu cuenta para ver tus gastos personales.</p>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.username.label }}
+                {{ form.username(class="form-control") }}
+                {% if form.username.errors %}
+                    <div class="error">{{ form.username.errors[0] }}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.password.label }}
+                {{ form.password(class="form-control") }}
+                {% if form.password.errors %}
+                    <div class="error">{{ form.password.errors[0] }}</div>
+                {% endif %}
+            </div>
+            {{ form.submit(class="btn-submit") }}
+        </form>
+        <p class="yatenes">¿No tienes cuenta? <a href="{{ url_for('register') }}">Regístrate aquí</a></p>
+    </div>
+</div>
+{% endblock %}

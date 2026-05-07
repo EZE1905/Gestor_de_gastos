@@ -7,15 +7,21 @@
     <!-- LINK AL CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css')}}">
 </head>
-<body>
+<body class="{% block body_class %}{% endblock %}">
     <!-- NAVBAR -->
     <!-- la dejamos en el layout porque independientemente de la seccion va a ser igual -->
     <nav>
         <img src="/static/icono.ico" alt="" class="img">
         <div>
-            <a href="/">Inicio</a>
-            <a href="/agregar_datos">Agregar</a>
-            <a href="/resumen">Resumen</a>
+            {% if current_user.is_authenticated %}
+                <a href="/">Inicio</a>
+                <a href="/agregar_datos">Agregar</a>
+                <a href="/resumen">Resumen</a>
+                <a href="{{ url_for('logout') }}">Cerrar Sesión</a>
+            {% else %}
+                <a href="{{ url_for('login') }}">Iniciar Sesión</a>
+                <a href="{{ url_for('register') }}">Registrarse</a>
+            {% endif %}
         </div>
     </nav>
     <!-- cambia segun la seccion que estemos -->
@@ -27,9 +33,15 @@
     <footer class="footer">
         <h2 class="footer_title">Gestor de movimientos</h2>
         <div class="contenedor_a">
-            <a class="buttom_footer" href="/">Inicio</a>
-            <a class="buttom_footer" href="/agregar_datos">Agregar</a>
-            <a href="/resumen" class="buttom_footer">Resumen</a>
+            {% if current_user.is_authenticated %}
+                <a class="buttom_footer" href="/">Inicio</a>
+                <a class="buttom_footer" href="/agregar_datos">Agregar</a>
+                <a href="/resumen" class="buttom_footer">Resumen</a>
+                <a href="{{ url_for('logout') }}" class="buttom_footer">Cerrar Sesión</a>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="buttom_footer">Iniciar Sesión</a>
+                <a href="{{ url_for('register') }}" class="buttom_footer">Registrarse</a>
+            {% endif %}
         </div>
         <p class="footer_copy">© 2026 - Gestor de movimientos</p>
     </footer>

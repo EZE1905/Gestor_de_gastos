@@ -1,10 +1,48 @@
 import sqlite3 
+from werkzeug.security import generate_password_hash, check_password_hash
 
-def obtener_movimientos():
+def crear_tabla_usuarios():
+    with sqlite3.connect("database/gastos.db") as conn:
+        cursor = conn.cursor()
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS usuarios (
+                id_usuario INTEGER PRIMARY KEY AUTOINCREMENT,
+                username TEXT UNIQUE NOT NULL,
+                password_hash TEXT NOT NULL
+            )
+        ''')
+        conn.commit()
+
+def agregar_usuario(username, password):
+    password_hash = generate_password_hash(password)
+    with sqlite3.connect("database/gastos.db") as conn:
+        cursor = conn.cursor()
+        cursor.execute('INSERT INTO usuarios (username, password_hash) VALUES (?, ?)', (username, password_hash))
+        conn.commit()
+
+def verificar_usuario(username, password):
     with sqlite3.connect("database/gastos.db") as conn:
         conn.row_factory = sqlite3.Row
         cursor = conn.cursor()
-        cursor.execute('SELECT * FROM movimientos')
+        cursor.execute('SELECT * FROM usuarios WHERE username = ?', (username,))
+        usuario = cursor.fetchone()
+        if usuario and check_password_hash(usuario['password_hash'], password):
+            return usuario
+    return None
+
+def obtener_usuario_por_id(id_usuario):
+    with sqlite3.connect("database/gastos.db") as conn:
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM usuarios WHERE id_usuario = ?', (id_usuario,))
+        usuario = cursor.fetchone()
+    return usuario 
+
+def obtener_movimientos(id_usuario):
+    with sqlite3.connect("database/gastos.db") as conn:
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM movimientos WHERE id_usuario = ?', (id_usuario,))
         movimientos = cursor.fetchall()
     return movimientos
 
@@ -25,37 +63,37 @@ def agregar_movimiento(id_usuario,monto,categoria,tipo,fecha):
         cursor.execute('INSERT INTO movimientos (id_usuario,monto,categoria,tipo,fecha) VALUES (?,?,?,?,?)',(id_usuario,monto,categoria,tipo,fecha))
         conn.commit()
 
-def eliminar_movimiento(id_movimiento):
+def eliminar_movimiento(id_movimiento, id_usuario):
     with sqlite3.connect("database/gastos.db") as conn:
         cursor = conn.cursor()
-        cursor.execute('DELETE FROM movimientos WHERE id_movimiento = ?',(id_movimiento,))
+        cursor.execute('DELETE FROM movimientos WHERE id_movimiento = ? AND id_usuario = ?', (id_movimiento, id_usuario))
         conn.commit()
 
-def obtener_un_movimiento(id_movimiento):
+def obtener_un_movimiento(id_movimiento, id_usuario):
     with sqlite3.connect("database/gastos.db") as conn:
         conn.row_factory = sqlite3.Row
         cursor = conn.cursor()
-        cursor.execute('SELECT * FROM movimientos WHERE id_movimiento = ?',(id_movimiento,))
+        cursor.execute('SELECT * FROM movimientos WHERE id_movimiento = ? AND id_usuario = ?', (id_movimiento, id_usuario))
         movimiento = cursor.fetchone()
     return movimiento
 
-def editar_movimiento(id_movimiento,monto,tipo,categoria,fecha):
+def editar_movimiento(id_movimiento,monto,tipo,categoria,fecha, id_usuario):
     with sqlite3.connect("database/gastos.db") as conn:
         cursor = conn.cursor()
-        cursor.execute('UPDATE movimientos SET monto = ?,categoria = ?,tipo = ?,fecha = ? WHERE id_movimiento = ?',(monto,categoria,tipo,fecha,id_movimiento))
+        cursor.execute('UPDATE movimientos SET monto = ?,categoria = ?,tipo = ?,fecha = ? WHERE id_movimiento = ? AND id_usuario = ?',(monto,categoria,tipo,fecha,id_movimiento, id_usuario))
         conn.commit()
 
-def obtener_movimientos_por_mes(mes):
+def obtener_movimientos_por_mes(mes, id_usuario):
     if mes:
         mes_sql = mes + "%"
         with sqlite3.connect("database/gastos.db") as conn:
             conn.row_factory = sqlite3.Row
             cursor = conn.cursor()
-            cursor.execute('SELECT * FROM movimientos WHERE fecha LIKE ?',(mes_sql,))
+            cursor.execute('SELECT * FROM movimientos WHERE fecha LIKE ? AND id_usuario = ?', (mes_sql, id_usuario))
             movimientos_por_mes = cursor.fetchall()
         return movimientos_por_mes
     else:
-        movimientos = obtener_movimientos()
+        movimientos = obtener_movimientos(id_usuario)
         return movimientos
     
 def meses(mes):

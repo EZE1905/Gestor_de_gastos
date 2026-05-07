@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}Registrarse{% endblock %}
+
+{% block body_class %}auth-no-scroll{% endblock %}
+
+{% block body %}
+<div class="container auth-page">
+    <div class="auth-presentation">
+        <span class="app-title">Gestor de Finanzas</span>
+        <p class="app-tagline">Administra tus ingresos y gastos desde un lugar seguro.</p>
+    </div>
+    <div class="card auth-card">
+        <h1>Crear cuenta</h1>
+        <p class="auth-subtitle">Registra tus datos para comenzar a controlar tus finanzas.</p>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.username.label }}
+                {{ form.username(class="form-control") }}
+                {% if form.username.errors %}
+                    <div class="error">{{ form.username.errors[0] }}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.password.label }}
+                {{ form.password(class="form-control") }}
+                {% if form.password.errors %}
+                    <div class="error">{{ form.password.errors[0] }}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.confirm_password.label }}
+                {{ form.confirm_password(class="form-control") }}
+                {% if form.confirm_password.errors %}
+                    <div class="error">{{ form.confirm_password.errors[0] }}</div>
+                {% endif %}
+            </div>
+            {{ form.submit(class="btn-submit") }}
+        </form>
+        <p class="yatenes">¿Ya tienes cuenta? <a href="{{ url_for('login') }}">Inicia sesión aquí</a></p>
+    </div>
+</div>
+{% endblock %}
